@@ -1,0 +1,3 @@
+<!--pages/maps/index.wxml-->
+<map id="maps" class='maps' show-location />
+<button type="primary" class='getMyMaps iconfont icon-icon-didian' bindtap="moveToLocation"></button>

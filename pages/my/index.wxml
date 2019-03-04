@@ -1,0 +1,42 @@
+<!--pages/my/index.wxml-->
+<view class='header'>
+  <!-- user -->
+  <view class='header-user'>
+    <view class='header-user-img'>
+      <image src='{{userImage}}'></image>
+    </view>
+    <view class='header-user-info'>
+      <view class='header-user-info-name'>{{userName}}</view>
+      <view class='header-user-info-tel'>{{userTel}}</view>
+    </view>
+  </view>
+  <!-- user data -->
+  <view class='header-udata'>
+    <view class='header-ud-list'>
+      <view>{{successTerminal}}</view>
+      <view>成功终端</view>
+    </view>
+    <view class='header-ud-list'>
+      <view>{{failureTerminal}}</view>
+      <view>成功终端</view>
+    </view>
+    <view class='header-ud-list'>
+      <view>{{orderSumMoney}}</view>
+      <view>成功终端</view>
+    </view>
+  </view>
+</view>
+
+<!-- operation list -->
+<view class='operation-list'>
+  <view class='operation-val' bindtap='getMyClickData'>
+    <text class='iconfont icon-shuju'></text>
+    <text class=''>业务员数据</text>
+    <text class='iconfont icon-Right'></text>    
+  </view>
+  <view class='operation-val' bindtap='getMyClickAbout'>
+    <text class='iconfont icon-shibai2'></text>
+        <text class=''>关于新海</text>
+    <text class='iconfont icon-Right'></text>   
+  </view>
+</view>

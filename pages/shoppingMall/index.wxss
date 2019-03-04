@@ -1,0 +1,191 @@
+/* pages/shoppingMall/index.wxss */
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
+  width: 100%;
+  font-size: 0.7rem;
+}
+
+.main-wire {
+  position: fixed;
+  top: 0;
+  left: 20%;
+  bottom: 0;
+  border-left: 0.01rem solid #f7f7fa;
+}
+
+.shop-left {
+  width: 20%;
+}
+
+.shop-right {
+  width: 80%;
+}
+
+.show-title {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  line-height: 2rem;
+  border-bottom: 0.01rem solid #f0f0f0;
+}
+
+.header-left-title {
+  font-weight: bold;
+}
+
+.header-right-but {
+  width: 50%;
+  text-align: center;
+}
+
+.header-right-but:active {
+  background: #f0f0f0;
+}
+
+.header-right-but>.iconfont {
+  color: #d9d9d9;
+}
+
+.select-up {
+  background: linear-gradient(to bottom, #5071ba 50%, #d9d9d9 50%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.select-down {
+  background: linear-gradient(to bottom, #d9d9d9 50%, #5071ba 50%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.pro-class-list {
+  padding: 0.25rem;
+}
+
+.pro-class-list >view {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0.25rem 0;
+}
+
+.pro-class-list >view:active {
+  color: red;
+}
+
+.provm {
+  position: fixed;
+  top: 2rem;
+  left: 20%;
+  right: 0;
+  bottom: 2rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.pro-vm-global {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 100%; */
+  padding: 0.5rem;
+}
+
+.pro-vm {
+  width: 65%;
+}
+
+.pro-image {
+  width: 5rem;
+  height: 5rem;
+  overflow: hidden;
+  margin-right: 0.5rem;
+  border-radius: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.pro-image>image {
+  width: 100%;
+  height: auto;
+}
+
+.pro-vm-num {
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+.pro-vm-but {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.pro-vm-num {
+  padding: 0.25rem;
+}
+
+.pro-vm-money, .pro-vm-number {
+  width: 50%;
+}
+
+.pro-vm-but {
+  margin-top: 0.5rem;
+}
+
+.pro-vm-but .iconfont {
+  font-size: 1.2rem;
+}
+
+.pro-vm-input>input {
+  text-align: center;
+  width: 100%;
+  min-width: 2rem;
+  max-width: 5rem;
+}
+
+.cart-submit {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 20%;
+  height: 2rem;
+  line-height: 2rem;
+  padding: 0 0 0 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border-top: 0.01rem solid #f7f7fa;
+}
+
+.cart-submit>view:first-child {
+  width: 60%;
+}
+
+.cart-submit>view:last-child {
+  width: 40%;
+  background: #ffcd42;
+  text-align: center;
+}
+
+.selectDefault {
+  color: red;
+}
+
+.selectProDefault {
+  display: flex;
+}
+
+.selectProHide {
+  display: none;
+}

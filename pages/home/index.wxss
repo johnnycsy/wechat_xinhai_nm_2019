@@ -1,0 +1,86 @@
+
+.header {
+  background: #5071ba;
+  color: #fff;
+}
+
+.header_user {
+  line-height: 1rem;
+  font-size: 0.7rem;
+  padding: 0.4rem;
+}
+
+.header_statistics {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 0.7rem;
+  padding-bottom: 1rem;
+}
+
+.header_main {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 33.3333%;
+  padding: 0.5rem;
+}
+
+.header_main>view {
+  width: 100%;
+  text-align: center;
+}
+
+.header_main>view:first-child {
+  font-size: 0.9rem;
+}
+
+.s-main {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.slide-image {
+  width: 100%;
+  max-width: 100%;
+}
+
+.s-image {
+  width: 35%;
+  margin: 3%;
+  overflow: hidden;
+}
+
+.s-value {
+  width: 60%;
+  line-height: 2rem;
+}
+
+.but-main {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+  border-top: 0.1rem solid #f0f0f0;
+}
+
+.but-list {
+  width: 30%;
+  margin: 0.5rem 1.5%;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.but-list>.iconfont {
+  width: 2rem;
+  height: 2rem;
+  margin: auto;
+  line-height: 2rem;
+  background: #83A1E3;
+  color: #FFFFFF;
+  border-radius: 100%;
+  border: 0.1rem solid #f0f0f0;
+}

@@ -1,0 +1,42 @@
+<!--pages/successTermainl/index.wxml-->
+<view class='main'>
+  <!-- header click -->
+  <view class='header_select'>
+    <view bindtap='selectClick' data-state="{{timeNumber}}" data-type='timeSort'>时间
+      <view class='{{timeSort}} iconfont icon-paixu1'></view>
+    </view>
+    <view bindtap='selectClick' data-state="{{addressNumber}}" data-type='addressSort'>距离
+      <view class='{{addressSort}} iconfont icon-paixu1'></view>
+    </view>
+    <view bindtap='selectClick' data-state="{{salesNumber}}" data-type='salesSort'>销量
+      <view class='{{salesSort}} iconfont icon-paixu1'></view>
+    </view>
+    <view bindtap='selectClick' data-state="{{saleNumber}}" data-type='saleSort'>销售额
+      <view class='{{saleSort}} iconfont icon-paixu1'></view>
+    </view>
+    <view bindtap='selectClick' data-state="{{debtNumber}}" data-type='debtSort'>欠款
+      <view class='{{debtSort}} iconfont icon-paixu1'></view>
+    </view>
+  </view>
+  <!-- section -->
+  <view class='section_main'>
+    <view class='section'>
+      <!-- section value start -->
+      <view class='se-value' bindtap='termainlDetails' data-termail_id="0">
+        <view class='se-vmain'>
+          <view class='se-image'>image</view>
+          <view class='se-val'>
+            <view class='se-title'>
+              <view class="se-subtitle">title</view>
+              <view class="se-maps">888公里</view>
+            </view>
+            <view class='se-mintitle iconfont icon-label'> text</view>
+            <view class='se-address iconfont icon-dizhi'> address</view>
+          </view>
+        </view>
+      </view>
+      <!-- section value end -->
+    </view>
+  </view>
+
+</view>

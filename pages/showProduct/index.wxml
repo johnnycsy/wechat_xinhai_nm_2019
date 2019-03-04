@@ -1,0 +1,30 @@
+<!--pages/showProduct/index.wxml-->
+<view class='header'>
+  <view bindtap='getHaderClick' data-type="{{headerType}}" data-target="1">商品售价
+    <text class="header-icon iconfont icon-paixu {{headerTarget==1?headerType==0?'select-up':'select-down':''}}"></text>
+  </view>
+  <view bindtap='getHaderClick' data-type="{{headerType}}" data-target="2">商品数量
+    <text class="header-icon iconfont icon-paixu {{headerTarget==2?headerType==0?'select-up':'select-down':''}}"></text>
+  </view>
+  <view bindtap='getHaderClick' data-type="{{headerType}}" data-target="3">型号选择
+    <text class="header-icon iconfont icon-paixu {{headerTarget==3?headerType==0? 'select-up': 'select-down': ''}}"></text>
+  </view>
+  <view data-type="0">
+    <text class="iconfont icon-icon-liebiao"></text>
+  </view>
+</view>
+<!-- product list -->
+<view class='product-main'>
+  <block wx:for="{{productAll}}" wx:for-index="index" wx:for-item="item">
+    <view class='product-list' data-index="{{index}}">
+      <view class='product-img'>
+        <image src='{{item.proImage}}'></image>
+      </view>
+      <view class='product-title'>{{item.proName}}</view>
+      <view class='product-num'>
+        <view class='product-money'>￥{{item.proMoney}}</view>
+        <view class='product-inventory'>库存：{{item.proInventory}}</view>
+      </view>
+    </view>
+  </block>
+</view>

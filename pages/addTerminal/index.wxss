@@ -1,0 +1,105 @@
+.main {
+  padding-bottom: 4rem;
+}
+
+.from-main {
+  font-size: 0.7rem;
+}
+
+.from-main input {
+  font-size: 0.7rem;
+}
+
+.form-list {
+  padding: 0.5rem;
+  border-bottom: 0.01rem solid #f0f0f0;
+  display: table;
+  width: 100%;
+}
+
+.form-list >text {
+  display: table-cell;
+  width: 10%;
+  max-width: 3rem;
+  min-width: 1.5rem;
+}
+
+.form-subtitle {
+  background: #f0f0f0;
+  padding: 0.5rem;
+}
+
+.form-list-subtitle {
+  color: #999;
+}
+
+.form-label {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.form-label>view {
+  width: 30%;
+  margin: 0.2rem 1%;
+  text-align: center;
+  border: 0.01rem solid #f0f0f0;
+  padding: 0.3rem 0;
+}
+
+.addcamera {
+  width: 3rem;
+  height: 3rem;
+  border: 0.01rem solid #f0f0f0;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: #bfbfbf;
+  background: white;
+}
+
+.form-sub-go {
+  position: fixed;
+  bottom: 1rem;
+  width: 50%;
+  margin-left: -25%;
+  left: 50%;
+  border: 0.01rem solid #f0f0f0;
+  border-radius: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  background: #5071ba;
+  color: #fff;
+}
+
+#map-main {
+  display: none;
+}
+
+.mapListSelectAddress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  display: none;
+  background: white;
+  font-size: 0.7rem;
+  z-index: 999;
+}
+
+.mapListSelectAddress>view {
+  padding: 0.5rem;
+  border-bottom: 0.01rem solid #f0f0f0;
+}
+
+.mapListSelectAddress>view:active {
+  background: #f0f0f0;
+}
+
+.mapListSelectAddress>view:last-child {
+  border-bottom: none;
+}

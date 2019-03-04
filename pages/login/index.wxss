@@ -1,0 +1,74 @@
+@import "../../utils/fonts/iconfont.wxss";
+
+.main {
+  width: 100%;
+}
+
+.logo-img {
+  width: 100%;
+}
+
+.logo-img >image {
+  width: 100%;
+  max-width: 100%;
+}
+
+.login-title {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 2rem;
+}
+
+.login-title>view {
+  width: 30%;
+  text-align: center;
+  padding: 0.5rem 0;
+  margin: 0 10%;
+}
+
+.login-select-form {
+  color: #5273bb;
+  border-bottom: 0.1rem solid #5273bb;
+}
+
+.login-input {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 0.8rem;
+  border: 0.1rem solid #e7eaed;
+  border-radius: 2rem;
+  margin: 0.5rem;
+  line-height: 1.8rem;
+}
+
+.login-input > input {
+  width: 75%;
+  height: auto;
+  font-size: 0.8rem;
+}
+
+.start-from {
+  display: none;
+}
+
+.login-but {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 0.8rem;
+  border: 0.1rem solid #e7eaed;
+  border-radius: 2rem;
+  margin: 0.5rem;
+  line-height: 2rem;
+  background: linear-gradient(top, #7f9ddf, #5575bd);
+  background: -moz-linear-gradient(top, #7f9ddf, #5575bd);
+  background: -webkit-linear-gradient(top, #7f9ddf, #5575bd);
+  background: -o-linear-gradient(top, #7f9ddf, #5575bd);
+  color: #FFFFFF;
+}
+
+.login-but >input {
+  text-align: center;
+}

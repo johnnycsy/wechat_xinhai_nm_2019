@@ -1,0 +1,73 @@
+<!--pages/cartClose/index.wxml-->
+<!-- 订单编辑 -->
+<view class='main' wx:if="{{payTimeNumber>24}}">
+  <block wx:for="{{cartAll}}" wx:for-index="indexKey" wx:for-item="item">
+    <view class='pro-list'>
+      <view class='pro-img'>
+        <image src='{{item.proImage}}'></image>
+      </view>
+      <view class="pro-val">
+        <view class='pro-title'>{{item.proName}}</view>
+        <view class='pro-subtitle'>{{item.proClassId}}</view>
+        <view class='pro-num'>x {{item.proIdNumber}}</view>
+        <view class='pro-del iconfont icon-lajitong' style='{{proDeletType}}' bindtap='cartDeleteProduct' data-index="{{indexKey}}"></view>
+      </view>
+    </view>
+  </block>
+  <!-- 支付方式 -->
+  <view class='pay-main'>
+    <view>支付方式</view>
+    <view>
+      <text>{{payName}}</text>
+    </view>
+  </view>
+  <!-- submit -->
+  <view class='cart-but'>
+    <view class='cart-list'>
+      <view>共计：{{cartEndNumber}} 元</view>
+      <view>共 {{cartKindNumber}} 种 {{cartProNumber}} 件商品</view>
+    </view>
+    <view class='cart-submit' bindtap='getCartCloseSubmitPrint'>打印</view>
+  </view>
+</view>
+<!-- 订单详情 -->
+<view class='main' wx:else>
+  <block wx:for="{{cartAll}}" wx:for-index="indexKey" wx:for-item="item">
+    <view class='pro-list'>
+      <view class='pro-img'>
+        <image src='{{item.proImage}}'></image>
+      </view>
+      <view class="pro-val">
+        <view class='pro-title'>{{item.proName}}</view>
+        <view class='pro-subtitle'>{{item.proClassId}}</view>
+        <view class='pro-num'>
+          <view class='iconfont icon-minus-circle' bindtap='getUpdateNumberMins' data-index="{{indexKey}}"></view>
+          <view>
+            <input value='{{item.proIdNumber}}' bindinput='getUpdateNumberMain' data-index="{{indexKey}}">></input>
+          </view>
+          <view class='iconfont icon-plus-circle' bindtap='getUpdateNumberPlus' data-index="{{indexKey}}"></view>
+        </view>
+        <view class='pro-del iconfont icon-lajitong' bindtap='cartDeleteProduct' data-index="{{indexKey}}"></view>
+      </view>
+    </view>
+  </block>
+  <!-- 支付方式 -->
+  <view class='pay-main'>
+    <view>支付方式</view>
+    <view>
+      <view class='pay-val'>
+        <block wx:for="{{payArr}}" wx:for-index="indexKey" wx:for-item="item">
+          <view bindtap='paySelectType' class='pay-list {{paySelect==item.id?"pay-select":""}}' data-index="{{indexKey}}">{{item.payName}}</view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <!-- submit -->
+  <view class='cart-but'>
+    <view class='cart-list'>
+      <view>共计：{{cartEndNumber}} 元</view>
+      <view>共 {{cartKindNumber}} 种 {{cartProNumber}} 件商品</view>
+    </view>
+    <view class='cart-submit' bindtap='getCartCloseSubmitPost'>结算</view>
+  </view>
+</view>

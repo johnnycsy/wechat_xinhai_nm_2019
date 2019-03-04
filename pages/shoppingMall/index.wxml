@@ -1,0 +1,76 @@
+<!--pages/shoppingMall/index.wxml-->
+<view class='main'>
+  <!-- left -->
+  <view class='shop-left'>
+    <view class='show-title'>
+      <view class='header-left-title'>商品型号</view>
+    </view>
+    <view class='pro-class-list'>
+      <view class='{{selectTargetClick==""?"selectDefault":""}}' data-id="0" bindtap='proClassButClick'>全部</view>
+      <block wx:for="{{proClassList}}" wx:for-index="itemIdx">
+        <view class='{{selectTargetClick==item.proClassId?"selectDefault":""}}' data-id="{{item.proClassId}}" bindtap='proClassButClick'>{{item.proClassName}}</view>
+      </block>
+    </view>
+  </view>
+  <!-- wire -->
+  <view class='main-wire'></view>
+  <!-- right -->
+  <view class='shop-right'>
+    <view class='show-title'>
+      <view class='header-right-but' data-type="0" data-direction="{{selectDirectionLeft}}" bindtap='showSelectButClick'>商品售价
+        <text class='{{showSelectButLeft}} iconfont icon-paixu'></text>
+      </view>
+      <view class='header-right-but' data-type="1" data-direction="{{selectDirectionRight}}" bindtap='showSelectButClick'>商品库存
+        <text class='{{showSelectButRight}} iconfont icon-paixu'></text>
+      </view>
+    </view>
+    <!-- product list -->
+    <view class='provm'>
+      <block wx:for="{{productAll}}" wx:for-item="item" wx:for-index="itemIdx">
+        <view class='pro-vm-global' wx:if="{{selectTargetClick === item.proClassId}}">
+          <view class='pro-image'>
+            <image src="{{item.proImage}}"></image>
+          </view>
+          <view class='pro-vm'>
+            <view class='pro-vm-proname'>{{item.proName}}</view>
+            <view class='pro-vm-num'>
+              <view class='pro-vm-money'>￥ {{item.proMoney}}</view>
+              <view class='pro-vm-number'>库存：{{item.proInventory}}</view>
+            </view>
+            <view class='pro-vm-but'>
+              <view class='pro-vm-cut iconfont icon-minus-circle' bindtap='cartButCut' data-index="{{itemIdx}}"></view>
+              <view class='pro-vm-input section'>
+                <input type='number' maxlength="8" value='{{item.proIdNumber}}' placeholder="0" bindinput="cartInput" data-index="{{itemIdx}}" />
+              </view>
+              <view class='pro-vm-plus iconfont icon-plus-circle' bindtap='cartButPlus' data-index="{{itemIdx}}"></view>
+            </view>
+          </view>
+        </view>
+        <view class='pro-vm-global' wx:elif="{{selectTargetClick === ''}}">
+          <view class='pro-image'>
+            <image src="{{item.proImage}}"></image>
+          </view>
+          <view class='pro-vm'>
+            <view class='pro-vm-proname'>{{item.proName}}</view>
+            <view class='pro-vm-num'>
+              <view class='pro-vm-money'>￥ {{item.proMoney}}</view>
+              <view class='pro-vm-number'>库存：{{item.proInventory}}</view>
+            </view>
+            <view class='pro-vm-but'>
+              <view class='pro-vm-cut iconfont icon-minus-circle' bindtap='cartButCut' data-index="{{itemIdx}}"></view>
+              <view class='pro-vm-input section'>
+                <input type='number' maxlength="8" value='{{item.proIdNumber}}' placeholder="0" bindinput="cartInput" data-index="{{itemIdx}}" />
+              </view>
+              <view class='pro-vm-plus iconfont icon-plus-circle' bindtap='cartButPlus' data-index="{{itemIdx}}"></view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <!-- 提交按扭 -->
+    <view class='cart-submit'>
+      <view>合计：{{cartSumNumber}} 元</view>
+      <view bindtap='orderClose'>确认提交</view>
+    </view>
+  </view>
+</view>

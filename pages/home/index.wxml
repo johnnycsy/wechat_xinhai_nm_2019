@@ -1,0 +1,72 @@
+<view>
+  <!-- 登录登录信息 -->
+  <view class='header'>
+    <!-- 用户通知 名称 -->
+    <view class='header_user'>
+      <text>欢迎，业务员</text>
+      <text>{{username}}!</text>
+      <text class='icon-14 iconfont icon-icon-tongzhi'></text>
+    </view>
+    <!-- 数据统计 -->
+    <view class='header_statistics'>
+      <view class='header_main'>
+        <view>0</view>
+        <view>今日订单</view>
+      </view>
+      <view class='header_main'>
+        <view>0</view>
+        <view>今日订单</view>
+      </view>
+      <view class='header_main'>
+        <view>0</view>
+        <view>今日订单</view>
+      </view>
+      <view class='header_main'>
+        <view>0</view>
+        <view>今日订单</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- swiper -->
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}">
+      <swiper-item>
+        <view class='s-main'>
+          <view class="s-image">
+            <image src="{{item}}" class="slide-image" />
+          </view>
+          <view class='s-value'>
+            <view>username</view>
+            <view>time</view>
+            <view>address</view>
+          </view>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- buttom click -->
+  <view class='but-main'>
+    <view class='but-list' data-url="addTerminal" bindtap='buttonClick'>
+      <view class='icon-14 iconfont icon-shangdian1'></view>
+      <view>新增终端</view>
+    </view>
+    <view class='but-list' data-url="addOrder" bindtap='buttonClick'>
+      <view class='icon-14 iconfont icon-dingdan3'></view>
+      <view>新增订单</view>
+    </view>
+    <view class='but-list' data-url="getServer" bindtap='buttonClick'>
+      <view class='icon-14 iconfont icon-hezuo1'></view>
+      <view>近期维护</view>
+    </view>
+    <view class='but-list' data-url="getSuccess" bindtap='buttonClick'>
+      <view class='icon-14 iconfont icon-chenggong'></view>
+      <view>成功终端</view>
+    </view>
+    <view class='but-list' data-url="getProduct" bindtap='buttonClick'>
+      <view class='icon-14 iconfont icon-shangpin1'></view>
+      <view>全部商品</view>
+    </view>
+  </view>
+
+</view>

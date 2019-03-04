@@ -1,0 +1,12 @@
+<!--pages/addOrder/index.wxml-->
+<view class='header section'>
+  <view>店铺名称</view>
+  <input bindinput="bindKeyInput" placeholder="如果附近没有相店铺，请输入查询" />
+</view>
+<view class='title'>附近店铺</view>
+<view class='stop-main'>
+  <block wx:for="{{shopNameArr}}" wx:for-index="index" wx:for-item="item">
+    <view class='{{targetShop==item.id?"pitch-shop":""}}' bindtap='getPlaceOrders' data-index="{{index}}">{{item.shopName}}</view>
+  </block>
+</view>
+<view class='stop-but' bindtap='getCartGo'>去下单</view>

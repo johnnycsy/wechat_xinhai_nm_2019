@@ -1,0 +1,35 @@
+<!--pages/cartClose/index.wxml-->
+<view class='main'>
+  <block wx:for="{{cartAll}}" wx:for-index="indexKey" wx:for-item="item">
+    <view class='pro-list'>
+      <view class='pro-img'>
+        <image src='{{item.proImage}}'></image>
+      </view>
+      <view class="pro-val">
+        <view class='pro-title'>{{item.proName}}</view>
+        <view class='pro-subtitle'>{{item.proClassId}}</view>
+        <view class='pro-num'>x {{item.proIdNumber}}</view>
+        <view class='pro-del iconfont icon-lajitong' bindtap='cartDeleteProduct' data-index="{{indexKey}}"></view>
+      </view>
+    </view>
+  </block>
+  <!-- 支付方式 -->
+  <view class='pay-main'>
+    <view>支付方式</view>
+    <view>
+      <view class='pay-val'>
+        <block wx:for="{{payArr}}" wx:for-index="indexKey" wx:for-item="item">
+          <view bindtap='paySelectType' class='pay-list {{paySelect==item.id?"pay-select":""}}' data-index="{{indexKey}}">{{item.payName}}</view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <!-- submit -->
+  <view class='cart-but'>
+    <view class='cart-list'>
+      <view>共计：{{cartEndNumber}} 元</view>
+      <view>共 {{cartKindNumber}} 种 {{cartProNumber}} 件商品</view>
+    </view>
+    <view class='cart-submit' bindtap='getCartCloseSubmitPost'>结算</view>
+  </view>
+</view>

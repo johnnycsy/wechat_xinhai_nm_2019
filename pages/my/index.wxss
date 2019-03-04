@@ -1,0 +1,82 @@
+/* pages/my/index.wxss */
+
+.header {
+  background: #5071ba;
+  font-size: 0.8rem;
+  color: white;
+}
+
+.header-user {
+  display: table;
+  width: 95%;
+  margin: auto;
+}
+
+.header-user-img {
+  width: 40%;
+  text-align: center;
+  display: table-cell;
+}
+
+.header-user-img >image {
+  width: 3rem;
+  height: 3rem;
+  border: 0.01rem solid #edece8;
+  border-radius: 100%;
+  margin: auto;
+}
+
+.header-user-info {
+  width: 60%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.header-udata {
+  display: table;
+  width: 100%;
+}
+
+.header-ud-list {
+  display: table-cell;
+  width: 30%;
+  margin: 0.25rem 1.5%;
+  text-align: center;
+  padding: 0.5rem 0.5rem 1.5rem 0.5rem;
+  font-size: 0.7rem;
+}
+
+.header-ud-list>view:first-child {
+  padding: 0.25rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.operation-list {
+  padding: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.operation-val {
+  display: table;
+  width: 100%;
+}
+
+.operation-val>text {
+  display: table-cell;
+  width: 80%;
+  line-height: 2rem;
+  border-bottom: 0.01rem solid #edece8;
+}
+
+.operation-val>text:first-child {
+  width: 10%;
+  text-align: center;
+  font-size: 1.2rem;
+  border-bottom: none;
+}
+
+.operation-val>text:last-child {
+  width: 10%;
+  text-align: right;
+}

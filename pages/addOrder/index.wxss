@@ -1,0 +1,62 @@
+/* pages/addOrder/index.wxss */
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 0.7rem;
+  padding: 0.5rem;
+}
+
+.header>view {
+  height: 1.4rem;
+  line-height: 1.4rem;
+  width: 30%;
+}
+
+.header>input {
+  width: 70%;
+}
+
+.title {
+  font-size: 0.7rem;
+  padding: 0.5rem;
+}
+
+.stop-main {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  flex-wrap: wrap;
+  padding-bottom: 3rem;
+}
+
+.stop-main view {
+  width: 24%;
+  margin: 0.25rem 1.5%;
+  font-size: 0.7rem;
+  border: 0.01rem solid #f0f0f0;
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  overflow: hidden;
+}
+
+.stop-main .pitch-shop {
+  border: 0.01rem solid red;
+}
+
+.stop-but {
+  position: fixed;
+  width: 50%;
+  height: 2rem;
+  line-height: 2rem;
+  color: white;
+  left: 50%;
+  margin-left: -25%;
+  bottom: 1rem;
+  border-radius: 2rem;
+  text-align: center;
+  background: #5071ba;
+  font-size: 0.8rem;
+}

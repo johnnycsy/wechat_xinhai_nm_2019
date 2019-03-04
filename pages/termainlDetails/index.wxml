@@ -1,0 +1,112 @@
+<!--pages/termainlDetails/index.wxml-->
+<view class='main'>
+  <!-- header -->
+  <view class='header'>
+    <view class='{{headerSelectClassLeft}}' data-select="0" bindtap='headerSelectClick'>店铺信息
+      <view></view>
+    </view>
+    <view class='{{headerSelectClassRight}}' data-select="1" bindtap='headerSelectClick'>订单信息
+      <view></view>
+    </view>
+  </view>
+  <!-- details -->
+  <view class='detailsMain {{detailsTarget}}'>
+    <view class='store-image'>
+      <view class='store-pic'>
+        <image src='{{storeImage}}'></image>
+      </view>
+      <view class='store-maps'>
+        <view class='store-type'>
+          <view class='iconfont icon-shangdian1'></view>
+          <view class='store-types'>类型</view>
+        </view>
+        <view class='store-distance'>888公里</view>
+      </view>
+    </view>
+    <view class='store-name'>
+      <view>店铺名称
+        <view class='iconfont icon-bianji1' bindtap='updateStoreClick'></view>
+      </view>
+    </view>
+    <view class='user-info'>
+      <view class='user-code iconfont icon-version'> 编号：{{userCode}}</view>
+      <view class='user-code iconfont icon-ditudingwei-copy'> 地址：{{userAddress}}</view>
+      <view class='user-code iconfont icon-yonghu1'> 联系人：{{userName}}</view>
+      <view class='user-code iconfont icon-dianhua1'> 联系电话：{{userTel}}</view>
+    </view>
+    <view class='user-but'>
+      <view class='user-but-list section'>
+        <picker mode="date" value="{{date}}" start="2015-09-01" end="2030-09-01" bindchange="userButSee">
+          <view class='user-but-icon iconfont icon-riqi'></view>
+          <view class='user-title picker'>拜访设置</view>
+        </picker>
+      </view>
+      <view class='user-but-list' bindtap='userButAddOrder'>
+        <view class='user-but-icon iconfont icon-dingdan2'></view>
+        <view class='user-title'>新增订单</view>
+      </view>
+      <view class='user-but-list' bindtap='userButTel'>
+        <view class='user-but-icon iconfont icon-dianhua1'></view>
+        <view class='user-title'>拨打电话</view>
+      </view>
+      <view class='user-but-list' bindtap='userButMap'>
+        <view class='user-but-icon iconfont icon-daohang1'></view>
+        <view class='user-title'>到这儿去</view>
+      </view>
+    </view>
+  </view>
+  <!-- order -->
+  <view class='orderMain {{orderTarget}}'>
+    <!-- order header -->
+    <view class='header_order'>
+      <view class='horderlist'>
+        <view class='hordermain'>
+          <view>总数量（只）</view>
+          <view>888</view>
+        </view>
+      </view>
+      <view class='horderlist'>
+        <view class='hordermain'>
+          <view>总数量（只）</view>
+          <view>888</view>
+        </view>
+      </view>
+      <view class='horderlist'>
+        <view class='hordermain'>
+          <view>总数量（只）</view>
+          <view>888</view>
+        </view>
+      </view>
+      <view class='horderlist'>
+        <view class='hordermain'>
+          <view>总数量（只）</view>
+          <view>888</view>
+        </view>
+      </view>
+    </view>
+    <!-- order title -->
+    <view class='order-title'>订单列表</view>
+    <!-- 订单列表 -->
+    <block wx:for="{{orderListArr}}">
+      <view class='order-list-main'>
+        <view class='order-list-left'>
+          <view class='order-l-left-table'>
+            <view>数量：{{item.orderOneNumber}}</view>
+            <view>金额：{{item.orderOneMoney}}</view>
+          </view>
+          <view>时间：{{item.orderOneTime}}</view>
+        </view>
+        <view class='order-list-right'>
+          <view>
+            <view class='order-list-but' bindtap='orderListEide' data-order_id="{{item.orderListId}}" data-order_time="{{item.orderOneTime}}" style='display:{{item.orderTimeExceed==false?"none":""}}'>
+              <text>编辑</text>
+            </view>
+            <view class='order-list-but' bindtap='orderListLook' data-order_id="{{item.orderListId}}" data-order_time="{{item.orderOneTime}}">
+              <text>详情</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

@@ -1,0 +1,13 @@
+<!--pages/orderPrint/index.wxml-->
+<view class='header'>
+  <view class='header-but' bindtap='getPrintData'>
+    <text>打印订单</text>
+  </view>
+  <view class='header-but' bindtap='getReturn'>
+    <text>返回首页</text>
+  </view>
+</view>
+<!-- 其它自定义参数 -->
+<view class='other-info'>
+
+</view>

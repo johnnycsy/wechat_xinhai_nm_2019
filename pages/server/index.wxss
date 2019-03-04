@@ -1,0 +1,123 @@
+/* pages/successTermainl/index.wxss */
+
+.main {
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.header_select {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 0.7rem;
+  border-bottom: 0.01rem solid #f0f0f0;
+  width: 100%;
+  height: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: white;
+}
+
+.header_select > view {
+  width: 20%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  line-height: 2rem;
+  transition: background 0.5s;
+  -o-transition: background 0.5s;
+  -moz-transition: background 0.5s;
+  -webkit-transition: background 0.5s;
+}
+
+.header_select > view:active {
+  background: #d9d9d9;
+}
+
+.header_select > view >view {
+  display: block;
+  height: 100%;
+  margin-left: 0.2rem;
+  color: #d9d9d9;
+}
+
+.select-up {
+  background: linear-gradient(to bottom, #5071ba 50%, #d9d9d9 50%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.select-down {
+  background: linear-gradient(to bottom, #d9d9d9 50%, #5071ba 50%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.section_main {
+  width: 100%;
+  margin-top: 2rem;
+  /* padding: .5rem; */
+}
+
+.section .se-value:last-child {
+  border-bottom: none;
+}
+
+.se-value {
+  /* width: 100%; */
+  border-bottom: 0.01rem solid #d9d9d9;
+  padding: 0.5rem;
+}
+
+.se-vmain {
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  padding: 0.5rem;
+  font-size: 0.7rem;
+}
+
+.se-image {
+  width: 5rem;
+  height: 5rem;
+  line-height: 5rem;
+  border-radius: 0.5rem;
+  border: 0.01rem solid #d9d9d9;
+  text-align: center;
+  overflow: hidden;
+}
+
+.se-val {
+  width: 80%;
+  margin-left: 0.5rem;
+}
+
+.se-title {
+  display: table;
+  width: 100%;
+}
+
+.se-title>view {
+  display: table-cell;
+}
+
+.se-mintitle {
+  width: 70%;
+  padding: 0.5rem 0;
+}
+
+.se-maps {
+  width: 30%;
+  text-align: right;
+}

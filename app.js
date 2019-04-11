@@ -2,7 +2,6 @@
 App({
   globalData: {
     userInfo: null,
-    appid: "wx80ac3a8ba0666cf1",    
     appApi: "http://192.168.6.33:8080/",
     mapsKey: "7T7BZ-RK3RP-U3UDJ-L62QA-BIXWJ-R7F6B",
   },

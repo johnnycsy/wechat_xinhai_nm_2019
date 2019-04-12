@@ -34,10 +34,18 @@
   width: 65%;
   margin-left: 0.5rem;
   position: relative;
+  /* background: #f4f4f4; */
+  font-size: 0.7rem;
+  padding-right: 0.5rem;
 }
 
 .pro-val>view {
   padding: 0.25rem 0;
+}
+
+.pro-subtitle {
+  /* font-weight: bold; */
+  font-size: 1rem;
 }
 
 .pro-del {

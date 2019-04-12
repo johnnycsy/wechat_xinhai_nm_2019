@@ -4,6 +4,10 @@
   background: #5071ba;
   font-size: 0.8rem;
   color: white;
+  height: 6.5rem;
+  display: flex;
+  align-content: center;
+  align-items: center;
 }
 
 .header-user {
@@ -35,6 +39,7 @@
 .header-udata {
   display: table;
   width: 100%;
+  border-bottom: 0.2rem solid #e7e8f1;
 }
 
 .header-ud-list {
@@ -42,14 +47,31 @@
   width: 30%;
   margin: 0.25rem 1.5%;
   text-align: center;
-  padding: 0.5rem 0.5rem 1.5rem 0.5rem;
-  font-size: 0.7rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  font-size: 0.8rem;
 }
 
 .header-ud-list>view:first-child {
   padding: 0.25rem;
   font-size: 1rem;
   font-weight: bold;
+  color: #4f70b9;
+}
+
+.header-ud-list-s {
+  display: table-cell;
+  width: 30%;
+  margin: 0.25rem 1.5%;
+  text-align: center;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.header-ud-list-s>view:last-child {
+  padding: 0.25rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #4f70b9;
 }
 
 .operation-list {
@@ -79,4 +101,28 @@
 .operation-val>text:last-child {
   width: 10%;
   text-align: right;
+}
+
+.section__title {
+  text-align: center;
+  padding: 0.5rem;
+  background: #e7e8f1;
+  color: #4f70b9;
+}
+
+.my-title {
+  padding: 0.5rem;
+  color: #4f70b9;
+}
+
+.icon-downs-go {
+  display: inline-block;
+  transform: rotate(90deg);
+}
+
+.my-subtitle-alert {
+  font-size: 0.7rem;
+  color: red;
+  text-align: center;
+  padding: .5rem;
 }

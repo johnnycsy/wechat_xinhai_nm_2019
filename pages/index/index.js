@@ -1,6 +1,7 @@
-//index.js
+//index.js 
 //获取应用实例
 const app = getApp()
+var _this
 Page({
   data: {
     motto: '欢迎使用新海国内销售系统',
@@ -15,91 +16,173 @@ Page({
     })
   },
   onLoad: function() {
+    _this = this
     //获取用户数据
     if (app.globalData.userInfo) {
-      console.log("======================================================0")
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-      this.getUserLogin();  //进行授后登录
+      console.log('===========================' + 1)
+      _this.getUserOpenid();
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
-      console.log("======================================================1")     
       app.userInfoReadyCallback = res => {
-        console.log(res)
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
-        this.getUserLogin();  //进行授后登录
+        console.log('===========================' + 2)
+        _this.getUserOpenid();
       }
     } else {
-      console.log("======================================================2")      
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
-          // console.log(res)
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
-          this.getUserLogin();  //进行授后登录
+          console.log('===========================' + 3)
+          _this.getUserOpenid();
         }
       })
     }
   },
+  //获取openid [requery]
+  getUserOpenid(event) {
+    // 登录微信    
+    var apiSrc = app.globalData.appApi
+    wx.login({
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log("自动获取数据======================================》" + JSON.stringify(res))
+        wx.request({
+          url: apiSrc + 'user/wxAuthor.do',
+          method: "POST",
+          data: {
+            data: JSON.stringify({
+              jscode: res.code
+            })
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success(res) {
+            console.log(res)
+            wx.setStorage({
+              key: 'openid',
+              data: res.data.openid,
+            })
+            //进行授后登录
+            _this.getUserInfo(res.data.openid);
+          },
+          fail(error) {
+            wx.showToast({
+              title: '服务器异常：' + JSON.stringify(error),
+              icon: 'none',
+            })
+          }
+        })
+      }
+    })
+  },
+  //用户信息分解 
   getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+    console.log('用户分解=============================================')
+    // console.log(e)
+    let userInfo = app.globalData.userInfo
+    console.log(userInfo)
+    if (userInfo == null || typeof userInfo == "undefined") {
+      // _this.onLoad();
+      app.getUserSetting();
+      return false;
+    }
+    if (typeof e == "undefined") {
+      wx.showToast({
+        title: '温馨提示：服务器更新中',
+        icon: 'none'
+      })
+      return false
+    }
     this.setData({
-      userInfo: e.detail.userInfo,
+      userInfo: app.globalData.userInfo,
       hasUserInfo: true
     })
-    this.getUserLogin();  //进行授后登录
+    if (e.type) {
+      // _this.onLoad();
+      _this.getUserOpenid();
+    } else {
+      this.getUserLogin(e); //进行授后登录
+    }
   },
-  getUserLogin: function() {
+  //用户登录 [requery]
+  getUserLogin: function(openid) {
     //用户登录
     wx.showLoading({
       title: '用户登录中....',
     })
-    var apiSrc = app.globalData.appApi + "user/accessWx.do";
-    var dataPost = {
-      data: JSON.stringify({
-        open_id: wx.getStorageSync('openid')
+    let apiSrc = app.globalData.appApi + "user/accessWx.do",
+      openidStorage = wx.getStorageSync('openid');
+    console.log(openidStorage)
+    console.log(openid)
+    if (openidStorage != '' || openid != '') {
+      var dataPost = {
+        data: JSON.stringify({
+          open_id: wx.getStorageSync('openid')
+        })
+      }
+    } else {
+      wx.hideLoading()
+      wx.showModal({
+        title: '温馨提示',
+        content: '1.请返回微信首页\r\n2.下拉查看小程序\r\n3.长按小程序点击删除\r\n4.再重新进入'
       })
+      return false;
     }
-    // console.log(dataPost)
+
+    // console.log("========================================================>"+JSON.stringify(dataPost))
     wx.request({
       url: apiSrc, // 仅为示例，并非真实的接口地址
       method: "POST",
       data: dataPost,
       header: {
-        // 'content-type': 'application/json' // 默认值
         'content-type': 'application/x-www-form-urlencoded'
       },
       success(res) {
-        //console.log(res.data)
-        setTimeout(function() {
-          if (res.data.code === 0) {            
+        console.log(res.data)
+        if (res.data.code === 0) {
+          wx.setStorage({
+            key: 'access_token',
+            data: res.data.access_token
+          })
+          wx.setStorage({
+            key: 'user_info',
+            data: res.data.user
+          })
+          wx.setStorage({
+            key: 'dict',
+            data: res.data.dict
+          })
+          setTimeout(function() {
             wx.reLaunch({
               url: '../home/index',
             })
-          } else {
-            wx.reLaunch({
-              url: '../home/index',
-            })
-          }
-        }, 2000)
+          }, 2000)
+        } else {
+          wx.reLaunch({
+            url: '../login/index',
+          })
+        }
       },
       fail(error) {
         console.log(error)
         wx.hideLoading();
         wx.showModal({
-          title: '登录失败',
-          content: '当前登录失败：' + error.data,
+          title: '异常错误',
+          content: '异常错误：' + error.errMsg,
         })
       }
     })

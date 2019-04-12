@@ -1,4 +1,5 @@
 // pages/showProduct/index.js
+const app = getApp()
 Page({
 
   /**
@@ -15,7 +16,7 @@ Page({
   data: {
     headerTarget: 1,
     headerType: 0,
-    productAll: [],
+    productAll: []
   },
 
   /**
@@ -26,27 +27,13 @@ Page({
       title: '商品浏览',
     })
     //产品信息实始化
-    var demo = [];
-    for (var i = 0; i < 12; i++) {
-      demo.push({
-        proId: 1,
-        proImage: 'http://wx.qlogo.cn/mmhead/Q3auHgzwzM7dbYJO5jicsYYdpibVAfv60DO4IJTuzphicqCxuK4t8E1sg/64/0',
-        proName: 1,
-        proMoney: 1,
-        proInventory: 1,
-      })
-    }
-    this.setData({
-      productAll: demo
-    })
+    this.getProList()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-
-  },
+  onReady: function() {},
 
   /**
    * 生命周期函数--监听页面显示
@@ -89,24 +76,108 @@ Page({
   onShareAppMessage: function() {
 
   },
-  /**点击HEADER目标 */
-  getHaderClick(event) {
-    console.log(event)
-    var _this = event.target.dataset;
-    var target = _this.target,
-      type = _this.type,
-      endType, endTarget;
-    var nowTarget = this.data.headerTarget;
-    if (nowTarget == target && type == '0') {
-      endType = 1;
-      endTarget = target;
+  getProList: function() {
+    var access_token = wx.getStorageSync('access_token')
+    var area_id = wx.getStorageSync('user_info').area_id
+    var user_id = wx.getStorageSync('user_info').user_id
+    var that = this
+    wx.showLoading({
+      title: '数据加载...',
+    })
+    app.callData.postRequest(app.globalData.appApi + 'user/listProduct.do', {
+      data: JSON.stringify({
+        'area_id': area_id,
+        'user_id': user_id
+      })
+    }, {
+      'content-type': 'application/x-www-form-urlencoded',
+      'access_token': access_token
+    }).then(res => {
+      console.log(res)
+      wx.hideLoading()
+      if (res.data.code === 0) {
+        that.setData({
+          productAll: res.data.bagList
+        })
+      } else {
+        wx.showToast({
+          title: '数据加载失败',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+
+    })
+  },
+  showSelectButClick: function(e) {
+    //   headerTarget: 1,
+    //       headerType: 0,
+    var sort = e.target.dataset.target
+    var showType = this.data.headerType
+    var showSort = this.data.headerTarget
+    //   console.log(showSort)
+    if (sort === showSort) {
+      if (showType === 1) {
+        this.setData({
+          headerType: 0
+        })
+        this.sortMode(sort, 0)
+      } else {
+        this.setData({
+          headerType: 1
+        })
+        this.sortMode(sort, 1)
+      }
+      //   console.log(this.data.showType)
     } else {
-      endType = 0;
-      endTarget = target;
+      this.setData({
+        headerTarget: sort,
+        headerType: 0
+      })
+      this.sortMode(sort, 0)
+
+    }
+  },
+  sortMode: function(showSort, showType) {
+    var proList = this.data.productAll
+    var len = this.data.productAll.length
+    if (showSort == 1) {
+      var key = "origin_price"
+    } else if (showSort == 2) {
+      var key = "amount"
+    } else {
+      var key = "item_no"
+    }
+    if (showType == 0) {
+      for (var i = 0; i < len; i++) {
+        for (var j = 0; j < len - 1 - i; j++) {
+          if (proList[j][key] >= proList[j + 1][key]) {
+            var x = proList[j + 1]
+            proList[j + 1] = proList[j]
+            proList[j] = x
+          }
+        }
+      }
+    } else {
+      for (var i = 0; i < len; i++) {
+        for (var j = 0; j < len - 1 - i; j++) {
+          if (proList[j][key] <= proList[j + 1][key]) {
+            var x = proList[j + 1]
+            proList[j + 1] = proList[j]
+            proList[j] = x
+          }
+        }
+      }
     }
     this.setData({
-      headerTarget: endTarget,
-      headerType: endType
+      productAll: proList
+    })
+  },
+  // 查看浏览图片
+  getShowImage(e) {
+    let image = e.target.dataset.image;
+    wx.previewImage({
+      urls: [image],
     })
   }
 })

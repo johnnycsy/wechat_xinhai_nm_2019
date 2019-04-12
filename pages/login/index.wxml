@@ -2,32 +2,35 @@
   <view class='logo-img'>
     <image src='{{logoImage}}'></image>
   </view>
-  <!-- 表单生成 -->
+  <!-- 表单生成  -->
   <view class='login-title' name="loginTitle">
     <view class="{{selectButOne}}" bindtap='butFrom' data-startint="0">{{loginTitle[0]}}</view>
     <view class="{{selectButTwo}}" bindtap='butFrom' data-startint="1">{{loginTitle[1]}}</view>
   </view>
   <!-- 登录样式生成 username -->
   <form class='form-username {{formUsername}}'>
-    <view class="login-input"> 用户名：
-      <input name="input" placeholder="请输入帐号" />
+    <view class="login-input-userpassword"> 用户名：
+      <input name="input" bindblur='getAccount' placeholder="请输入帐号" />
     </view>
-    <view class="login-input"> 用户名：
-      <input name="input" type='password' placeholder="请输入密码" />
+    <view class="login-input-userpassword"> 密　码：
+      <input name="input" type='password' bindblur='getPwd' placeholder="请输入密码" />
     </view>
-    <view class='login-but'>
+    <view class='login-but' bindtap='signIn'>
       登录
     </view>
   </form>
   <!-- 登录样式生成 phone -->
   <form class='form-phone {{formPhone}}'>
-    <view class="login-input"> 手机号：
-      <input name="input" placeholder="请输入帐号" />
+    <view class="login-input">
+      <view>手机号：</view>
+      <input name="input" bindblur='getUpdatePhoneNumber' placeholder="请输入帐号" />
     </view>
-    <view class="login-input"> 验证码：
-      <input name="input" type='password' placeholder="请输入密码" />
+    <view class="login-input" >
+      <view> 验证码：</view>
+      <input class='loginhponecode' name="input" type='text' bindblur='getPhoneCode' placeholder="请输入验证码" />
+      <view class='login-phone-code' bindtap='getPhoneSmsCode'>{{phoneCodeNumberTime}}</view>
     </view>
-    <view class='login-but'>
+    <view class='login-but' bindtap='phoneSignIn'>
       登录
     </view>
   </form>

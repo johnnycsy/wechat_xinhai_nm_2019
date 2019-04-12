@@ -1,45 +1,20 @@
+//引入request
+import request from './apis/request.js'
 //app.js
 App({
   globalData: {
     userInfo: null,
-    appApi: "http://192.168.6.33:8080/",
+    appApi: 'https://java71.xinhaimobile.cn/applet/',
+    // appApi: 'http://10.168.5.214:8088/', //测试地址
     mapsKey: "7T7BZ-RK3RP-U3UDJ-L62QA-BIXWJ-R7F6B",
+    qiniuHttp: "https://upload-z2.qiniup.com",
+    qiniuSrc: "http://neimao.qiniu.xinhai.com/",
   },
   onLaunch: function() {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 登录微信
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        // console.log(this.globalData.appid)
-        wx.request({
-          url: 'https://api.weixin.qq.com/sns/jscode2session',
-          method: "GET",
-          data: {
-            appid: this.globalData.appid,
-            secret: this.globalData.appsecret,
-            js_code: res.code,
-            grant_type: 'authorization_code'
-          },
-          header: {
-            'content-type': 'application/json' // 默认值
-          },
-          success(res) {
-            // console.log(res.data)
-            // var session_key = res.data.session_key;
-            // openid = res.data.openid
-            wx.setStorage({
-              key: 'openid',
-              data: res.data.openid,
-            })
-          }
-        })
-      }
-    })
+    // var logs = wx.getStorageSync('logs') || []
+    // logs.unshift(Date.now())
+    // wx.setStorageSync('logs', logs)
 
     // 获取用户信息
     wx.getSetting({
@@ -61,5 +36,52 @@ App({
         }
       }
     })
-  }
+  },
+  getUserSetting() {
+    // 获取用户信息
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+          wx.getUserInfo({
+            success: res => {
+              // 可以将 res 发送给后台解码出 unionId
+              this.globalData.userInfo = res.userInfo
+
+              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+              // 所以此处加入 callback 以防止这种情况
+              if (this.userInfoReadyCallback) {
+                this.userInfoReadyCallback(res)
+              }
+            }
+          })
+        }
+      }
+    })
+  },
+  //上传七牛图片
+  getUploadFile(event) {
+    wx.uploadFile({
+      url: this.globalData.qiniuHttp,
+      filePath: event.path,
+      name: "file",
+      header: {
+        "Content-Type": "multipart/form-data"
+      },
+      formData: {
+        'key': event.key,
+        'x:<custom_name>': event.name,
+        'custom_value': event.name,
+        'token': event.token,
+        'file': event.path,
+      },
+      success: function(res) {
+        console.log(res)
+      },
+      fail: function(res) {
+        console.log(res)
+      }
+    })
+  },
+  callData: new request
 })

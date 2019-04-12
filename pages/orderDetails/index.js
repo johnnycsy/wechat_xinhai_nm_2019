@@ -1,8 +1,9 @@
 // pages/cartClose/index.js
+const app = getApp()
 Page({
 
   /**
-   * 页面的初始数据
+   * 页面的初始数据 
    * payTimeNumber 交易时间差，小时为单位
    */
   data: {
@@ -23,69 +24,67 @@ Page({
    */
   onLoad: function(options) {
     wx.setNavigationBarTitle({
-      title: '购物车',
+      title: '订单详情',
     })
     var order_id = options.order_id;
     var order_time = options.order_time;
-    console.log(order_time)
+      var stock_no = options.stock_no
     //根据订单ID获取订单
+      if (options.pay_type){
+          var pay_type = options.pay_type;
+          var type_name = ''
+              switch (Number(pay_type)){
+                case 1:
+                    type_name = "支付宝"
+                    break;
+                case 2:
+                    type_name = "微信支付"
+                    break;
+                case 3:
+                    type_name = "现金支付"
+                    break;
+                case 4:
+                    type_name = "欠款"
+                    break;
+            }
+          this.setData({
+              order_id: order_id,
+              payTimeNumber: order_time,
+              cartAll: [],
+              payName: type_name
+          })
+      }else{
+          //购物车显示 & 支付方式
+          this.setData({
+              order_id: order_id,
+              payTimeNumber: order_time,
+              stock_no: stock_no,
+              cartAll: [],
+              payArr: [{
+                  id: 1,
+                  payName: "支付宝"
+              }, {
+                  id: 2,
+                  payName: "微信支付"
+              }, {
+                  id: 3,
+                  payName: "现金支付"
+              }, {
+                  id: 4,
+                  payName: "欠款"
+              }]
+          })
+      }
+    // this.getCartStatistics(cartAll);
+    // if (this.data.payTimeNumber > 1) {
+    // //   this.setData({
+    // //     payName: "支付宝",
+    // //     proDeletType: "display:none",
+    // //   })
+    // } else {
 
-    //购物车显示 & 支付方式
-    this.setData({
-      order_id: order_id,
-      payTimeNumber: order_time,
-      cartAll: [{
-        fixationInventory: 123456,
-        proClassId: 1,
-        proIdNumber: 1,
-        proImage: "http://wx.qlogo.cn/mmhead/Q3auHgzwzM7dbYJO5jicsYYdpibVAfv60DO4IJTuzphicqCxuK4t8E1sg/64/0",
-        proInventory: 123455,
-        proMoney: "8888.00",
-        proName: "商品名称",
-        proid: 1,
-      }, {
-        fixationInventory: 123456,
-        proClassId: 1,
-        proIdNumber: 1,
-        proImage: "http://wx.qlogo.cn/mmhead/Q3auHgzwzM7dbYJO5jicsYYdpibVAfv60DO4IJTuzphicqCxuK4t8E1sg/64/0",
-        proInventory: 123455,
-        proMoney: "8888.00",
-        proName: "商品名称",
-        proid: 1,
-      }, {
-        fixationInventory: 123456,
-        proClassId: 1,
-        proIdNumber: 1,
-        proImage: "http://wx.qlogo.cn/mmhead/Q3auHgzwzM7dbYJO5jicsYYdpibVAfv60DO4IJTuzphicqCxuK4t8E1sg/64/0",
-        proInventory: 123455,
-        proMoney: "8888.00",
-        proName: "商品名称",
-        proid: 1,
-      }],
-      payArr: [{
-        id: 1,
-        payName: "支付宝"
-      }, {
-        id: 2,
-        payName: "微信支付"
-      }, {
-        id: 3,
-        payName: "现金支付"
-      }, {
-        id: 4,
-        payName: "欠款"
-      }]
-    })
-    // console.log(cartAll)
-    this.getCartStatistics(cartAll);
-    if (this.data.payTimeNumber > 24) {
-      this.setData({
-        payName: "支付宝",
-        proDeletType: "display:none",
-      })
-    } else {
-
-    }
+    // }
+      this.getDataList(order_id)
   },
 
   /**
@@ -172,16 +171,64 @@ Page({
     })
   },
   /**提交订单 */
-  getCartCloseSubmitPost(event) {
-    console.log(event)
-    //结束
-    wx.navigateTo({
-      url: '../orderPrint/index?orderCode=112233445566',
-    })
+  getCartCloseSubmitPost() {
+      var access_token = wx.getStorageSync('access_token')
+      var user_id = wx.getStorageSync('user_info').user_id
+      var stock_id = this.data.order_id
+      var all_money = this.data.cartEndNumber
+      var all_number = 0
+      var stockInfoList = []
+      var cartAll = this.data.cartAll
+      for (var i = 0; i < cartAll.length; i++) {
+          var arr = {
+              'p_b_id': cartAll[i].p_b_id,
+              'all_price': (cartAll[i].proMoney * cartAll[i].proIdNumber).toFixed(2),
+              'price': cartAll[i].proMoney.toFixed(2),
+              'number': cartAll[i].proIdNumber
+          }
+          all_number = all_number + cartAll[i].proIdNumber
+          stockInfoList.push(arr)
+      }
+      console.log(JSON.stringify({
+          'stock_id': stock_id,
+          'user_id': user_id,
+          'stock_id': stock_id,
+          'all_money': all_money,
+          'all_number': all_number,
+          'stockInfoList': stockInfoList
+      }))
+      var that = this
+      app.callData.postRequest(app.globalData.appApi + 'user/updateStock.do', {
+          data: JSON.stringify({
+              'stock_id': stock_id,
+              'user_id': user_id,
+              'stock_id': stock_id,
+              'all_money': all_money,
+              'all_number': all_number,
+              'stockInfoList': stockInfoList
+          })
+      }, {
+              'content-type': 'application/x-www-form-urlencoded',
+              'access_token': access_token
+          }).then(res => {
+              console.log(res.data)
+              if (res.data.code === 0) {
+                  wx.navigateTo({
+                      url: '../orderPrint/index?orderCode=' + that.data.stock_no + '&orderId=' + res.data.nmStock.stock_id + '&pay_type=' + that.data.paySelect
+                  })
+              } else {
+                  wx.showToast({
+                      title: '订单修改失败：'+res.data.msg,
+                      icon: 'none',
+                      duration: 2000
+                  })
+              }
+
+          })
   },
   /**选择支付方式 */
   paySelectType(event) {
-    console.log(event)
+      console.log(this.data)
     var targetVal = event.target.dataset.index;
     var _this = this.data.payArr;
     var endTarget = _this[targetVal];
@@ -192,7 +239,7 @@ Page({
   },
   /**打印方式 */
   getCartCloseSubmitPrint(event) {
-    console.log(event)
+    console.log(this.data)
     wx.showToast({
       title: '打印功能未开通',
       icon: 'none',
@@ -255,6 +302,52 @@ Page({
     })
     // console.log(_this)
     this.getCartStatistics(_this)
+  },
+  getDataList:function(stock_id){
+      var access_token = wx.getStorageSync('access_token')
+      var user_id = wx.getStorageSync('user_info').user_id
+      var quantity = 10
+      var that = this
+      app.callData.postRequest(app.globalData.appApi + 'user/listStockInfo.do', {
+          data: JSON.stringify({
+              'stock_id': stock_id,
+              'user_id': user_id
+          })
+      }, {
+              'content-type': 'application/x-www-form-urlencoded',
+              'access_token': access_token
+          }).then(res => {
+              console.log(res.data)
+              if (res.data.code === 0) {
+                  if (res.data.stockInfoList) {
+                      var alist = that.data.cartAll
+                      var list = res.data.stockInfoList
+                      for(var i = 0; i < list.length; i++){
+                          var arr = {
+                              'p_b_id': list[i]['p_b_id'],
+                              'proIdNumber': list[i]['number'],
+                              'proImage': list[i]['product_img'],
+                              'proMoney': list[i]['price'],
+                              'proName': list[i]['bag_name'],
+                              'proName': list[i]['amount'] + list[i]['number'],
+                              'proInventory': list[i]['amount']
+                          }
+                          alist.push(arr)
+                      }
+                      this.getCartStatistics(alist)
+                      that.setData({
+                          cartAll: alist
+                      })
+                  }
+              } else {
+                  wx.showToast({
+                      title: '数据加载失败',
+                      icon: 'none',
+                      duration: 2000
+                  })
+              }
+
+          })
   }
 
 })

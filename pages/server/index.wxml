@@ -20,18 +20,20 @@
   </view>
   <!-- section -->
   <view class='section_main'>
-    <view class='section'>
+    <view class='section' wx:for='{{storeList}}' wx:for-item='item'>
       <!-- section value start -->
-      <view class='se-value' bindtap='termainlDetails' data-termail_id="0">
+      <view class='se-value'  bindtap='termainlDetails' data-termail_id ='{{item}}' >
         <view class='se-vmain'>
-          <view class='se-image'>image</view>
+          <view class='se-image'>
+             <image src='{{item.img_head + item.img_shop1}}'></image> 
+          </view>
           <view class='se-val'>
             <view class='se-title'>
-              <view class="se-subtitle">title</view>
-              <view class="se-maps">888公里</view>
+              <view class="se-subtitle">{{item.store_name}}</view>
+              <view class="se-maps">{{item.distance}}公里</view>
             </view>
-            <view class='se-mintitle iconfont icon-label'> text</view>
-            <view class='se-address iconfont icon-dizhi'> address</view>
+            <view class='se-mintitle iconfont icon-label'> 编号：{{item.store_no}}</view>
+            <view class='se-address iconfont icon-dizhi'> {{item.address}}</view>
           </view>
         </view>
       </view>

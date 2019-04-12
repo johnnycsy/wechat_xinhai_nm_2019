@@ -1,0 +1,28 @@
+缓存数据说明
+user_info ======== 用户个人信息
+openid =========== 微信唯一身份值
+access_token ===== 用户access_token
+dict ============= 基本信息，用户ID等
+
+临时数据：
+cartAll ========== 购物车临时数据，上一次购物的记录
+
+
+用户个人信息：样式如下：
+{
+"represent_name": "动感超人",
+"address": "上海路124号",
+"user_name": "gotest",
+"sex": false,
+"belong_id": 0,
+"remark": "",
+"area_id": 2,
+"type": 5,
+"user_id": 1,
+"phone": "0574-12345678",
+"passwd": "6C82A89F6E4C4B71851D6A1AF43F691E",
+"company_name": "浙江分公司",
+"logo": "http://neimao.qiniu.xinhai.com/nm_mytoyota_20180411175043382845",
+"cus_num": 56,
+"status": 1
+}

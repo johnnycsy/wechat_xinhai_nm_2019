@@ -12,11 +12,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+      console.log(options)
     wx.setNavigationBarTitle({
       title: '下单成功',
     })
     this.setData({
-      orderCode: options.orderCode,
+        orderCode: options.orderCode,
+        orderId: options.orderId,
+        pay_type: options.pay_type,
     })
     //此处可以进行订单查询，并进行排列内容，后续操作打印
   },
@@ -43,7 +46,7 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面卸载
+   * 生命周期函数--监听页面卸载 
    */
   onUnload: function() {
 
@@ -71,11 +74,14 @@ Page({
   },
   /**打印事件 */
   getPrintData(event) {
-    console.lo(event)
-    wx.showToast({
-      title: '打印功能未完善',
-      icon: 'none',
-    })
+    // console.lo(event)
+    // wx.showToast({
+    //   title: '打印功能未完善',
+    //   icon: 'none',
+    // })
+      wx.navigateTo({
+          url: '../orderDetails/index?order_id=' + this.data.orderId + '&order_time=999' + '&stock_no=' + this.data.orderCode + '&pay_type=' + this.data.pay_type
+      })
   },
   /**返回事件 */
   getReturn(event) {

@@ -1,14 +1,10 @@
 // pages/successTermainl/index.js
 const app = getApp()
-var resMap = null;
-var latitude = null;
-var longitude = null;
-var speed = null;
-var accuracy = null;
+
 Page({
 
   /**
-   * 页面的初始数据
+   * 页面的初始数据 
    */
   data: {
     timeSort: "select-up",
@@ -17,6 +13,11 @@ Page({
     salesNumber: 1,
     saleNumber: 1,
     debtNumber: 1,
+    page: 2,
+    storeList: [],
+    lat: "",
+    lon: "",
+      sort_name:"时间"
   },
 
   /**
@@ -27,28 +28,49 @@ Page({
     wx.setNavigationBarTitle({
       title: '成功终端',
     })
+    // //获取坐标
+    // wx.getSetting({
+    //     success(res) {
+    //         var that = this
+    //         wx.getLocation({
+    //             type: 'wgs84',
+    //             success(res) {
+    //                 latitude = res.latitude
+    //                 longitude = res.longitude
+    // that.setData({
+    //     lat: latitude,
+    //     lon: longitude
+    // })
+    //             }
+    //         })
+    //     }
+    // })
     //获取坐标
-    var _this = this;
-    wx.showLoading({
-      title: '数据定位获取中...',
-    })
+    var that = this
     wx.getSetting({
       success(res) {
         wx.getLocation({
           type: 'wgs84',
           success(res) {
-            console.log(res)
-            resMap = res
-            latitude = res.latitude
-            longitude = res.longitude
-            speed = res.speed
-            accuracy = res.accuracy
-            //获取信息
-            _this.getQueryDataInfo();
+            // console.log(res)
+            // resMap = res
+            var latitude = res.latitude
+            var longitude = res.longitude
+            // speed = res.speed
+            // accuracy = res.accuracy
+            that.setData({
+              lat: latitude,
+              lon: longitude
+            })
+            that.getDataList()
           }
         })
       }
     })
+    this.setData({
+      page: 1
+    })
+
   },
 
   /**
@@ -103,11 +125,14 @@ Page({
    * 排序选择事件
    */
   selectClick(event) {
-    // console.log(event)
+    wx.showLoading({
+      title: '排序中...',
+    })
     let obj = event.target.dataset.state,
       typeMain = event.target.dataset.type;
     // console.log(obj)
     if (typeof obj == "undefined") {
+      wx.hideLoading()
       return false;
     }
     this.setData({
@@ -127,12 +152,16 @@ Page({
         if (obj == "0") {
           this.setData({
             timeSort: "select-down",
-            timeNumber: 1
+            timeNumber: 1,
+            sort: 'store_no asc',
+            sort_name:'时间'
           })
         } else {
           this.setData({
             timeSort: "select-up",
-            timeNumber: 0
+            timeNumber: 0,
+            sort: 'store_no desc',
+              sort_name: '时间'
           })
         }
         break;
@@ -140,12 +169,16 @@ Page({
         if (obj == "0") {
           this.setData({
             addressSort: "select-down",
-            addressNumber: 1
+            addressNumber: 1,
+              sort: 'distance asc',
+              sort_name: '时间'
           })
         } else {
           this.setData({
             addressSort: "select-up",
-            addressNumber: 0
+            addressNumber: 0,
+              sort: 'distance desc',
+              sort_name: '时间'
           })
         }
         break;
@@ -153,12 +186,16 @@ Page({
         if (obj == "0") {
           this.setData({
             salesSort: "select-down",
-            salesNumber: 1
+            salesNumber: 1,
+              sort: 'number asc',
+              sort_name: '销量'
           })
         } else {
           this.setData({
             salesSort: "select-up",
-            salesNumber: 0
+            salesNumber: 0,
+              sort: 'number desc',
+              sort_name: '销量'
           })
         }
         break;
@@ -166,12 +203,16 @@ Page({
         if (obj == "0") {
           this.setData({
             saleSort: "select-down",
-            saleNumber: 1
+            saleNumber: 1,
+              sort: 'money asc',
+              sort_name: '销售额'
           })
         } else {
           this.setData({
             saleSort: "select-up",
-            saleNumber: 0
+            saleNumber: 0,
+              sort: 'number desc',
+              sort_name: '销售额'
           })
         }
         break;
@@ -179,23 +220,29 @@ Page({
         if (obj == "0") {
           this.setData({
             debtSort: "select-down",
-            debtNumber: 1
+            debtNumber: 1,
+              sort: 'debt asc',
+              sort_name: '欠款'
           })
         } else {
           this.setData({
             debtSort: "select-up",
-            debtNumber: 0
+            debtNumber: 0,
+              sort: 'debt desc',
+              sort_name: '欠款'
           })
         }
         break;
       default:
         wx.showToast({
-          title: '系统获取参数异常',
+          title: '暂无数据：' + res.data.msg,
           icon: 'cancel',
           duration: 2000
         })
         break;
     }
+    // this.onLoad()
+    this.getDataList()
   },
   /**
    * 上拉加载事件
@@ -204,6 +251,11 @@ Page({
     wx.showLoading({
       title: '数据加载中',
     })
+    var page = this.data.page + 1
+    this.setData({
+      page: page
+    })
+    this.getStoreList()
     setTimeout(function() {
       wx.hideLoading()
     }, 3000)
@@ -224,18 +276,112 @@ Page({
       }
     })
   },
+  getStoreList: function() {
+    wx.showLoading({
+      title: '数据加载中',
+    })
+    var access_token = wx.getStorageSync('access_token')
+    var user_id = wx.getStorageSync('user_info').user_id
+    var page = this.data.page
+    var quantity = 10
+    var store_id = ''
+    var lon = this.data.lon
+    var lat = this.data.lat
+    var search_con = ''
+    var sort = this.data.sort
+    var that = this
+    app.callData.postRequest(app.globalData.appApi + 'user/listStore.do', {
+      data: JSON.stringify({
+        'user_id': user_id,
+        'page': page,
+        'quantity': quantity,
+        'store_id': store_id,
+        'lon': lon,
+        'lat': lat,
+        'search_con': search_con,
+        'sort': sort
+      })
+    }, {
+      'content-type': 'application/x-www-form-urlencoded',
+      'access_token': access_token
+    }).then(res => {
+      wx.hideLoading()
+      if (res.data.code === 0) {
+        var list = that.data.storeList
+        var storeList = res.data.storeList
+        for (var x = 0; x < storeList.length; x++) {
+          storeList[x]['distance'] = (storeList[x]['distance'] / 1000).toFixed(2)
+          list.push(storeList[x])
+        }
+        that.setData({
+          storeList: list
+        })
+      } else {
+        wx.showToast({
+          title: '数据加载失败' + res.data.msg,
+          icon: 'none',
+          duration: 2000
+        })
+      }
+
+    })
+  },
   /**点击查看详情 */
   termainlDetails(event) {
     // console.log(event)
-    var termail_id = event.currentTarget.dataset.termail_id;
-    console.log(termail_id)
+    var termail_id = JSON.stringify(event.currentTarget.dataset.termail_id);
+    //  console.log(termail_id)
     // 打开店铺详情
     wx.navigateTo({
       url: '../termainlDetails/index?termail_id=' + termail_id,
     })
   },
-  /**获取事件 */
-  getQueryDataInfo(event) {
-    wx.hideLoading()
+  getDataList: function() {
+    wx.showLoading({
+      title: '数据查询中...',
+    })
+    var access_token = wx.getStorageSync('access_token')
+    var user_id = wx.getStorageSync('user_info').user_id
+    var page = 1
+    var quantity = 10
+    var store_id = ''
+    var lon = this.data.lon
+    var lat = this.data.lat
+    var search_con = ''
+    var sort = this.data.sort
+    var that = this
+    app.callData.postRequest(app.globalData.appApi + 'user/listStore.do', {
+      data: JSON.stringify({
+        'user_id': user_id,
+        'page': page,
+        'quantity': quantity,
+        'store_id': store_id,
+        'lon': lon,
+        'lat': lat,
+        'search_con': search_con,
+        'sort': sort
+      })
+    }, {
+      'content-type': 'application/x-www-form-urlencoded',
+      'access_token': access_token
+    }).then(res => {
+      wx.hideLoading()
+      if (res.data.code === 0) {
+        var storeList = res.data.storeList
+        for (var x = 0; x < storeList.length; x++) {
+          storeList[x]['distance'] = (Math.round(storeList[x]['distance'] / 1000))
+        }
+        that.setData({
+          storeList: storeList
+        })
+      } else {
+        wx.showToast({
+          title: '数据加载失败:' + res.data.msg,
+          icon: 'none',
+          duration: 2000
+        })
+      }
+
+    })
   }
 })

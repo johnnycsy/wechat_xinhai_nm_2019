@@ -9,4 +9,14 @@
     <view class='{{targetShop==item.id?"pitch-shop":""}}' bindtap='getPlaceOrders' data-index="{{index}}">{{item.shopName}}</view>
   </block>
 </view>
-<view class='stop-but' bindtap='getCartGo'>去下单</view>
+
+<view class='stop_but'>
+  <view class='stop-but' bindtap='getScanOrder' style='display:none;'>
+    <image src='../../utils/image/scan_20190411.png'></image>
+    <view>扫码下单</view>
+  </view>
+   <view class='stop-but' bindtap='getCartGo'>
+    <image src='../../utils/image/orderdown_20190411.png.png'></image>
+    <view>手动下单</view>
+  </view>
+</view>

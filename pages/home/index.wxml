@@ -3,69 +3,82 @@
   <view class='header'>
     <!-- 用户通知 名称 -->
     <view class='header_user'>
-      <text>欢迎，业务员</text>
+      <text>欢迎，业务员：</text>
       <text>{{username}}!</text>
-      <text class='icon-14 iconfont icon-icon-tongzhi'></text>
+      <text class='icon-14 iconfont icon-icon-tongzhi' style='display:none'></text>
     </view>
     <!-- 数据统计 -->
     <view class='header_statistics'>
       <view class='header_main'>
-        <view>0</view>
+        <view>{{homeDataNumberOrder}}</view>
         <view>今日订单</view>
       </view>
       <view class='header_main'>
-        <view>0</view>
-        <view>今日订单</view>
+        <view>{{homeDataNumberTermainal}}</view>
+        <view>今日终端</view>
       </view>
       <view class='header_main'>
-        <view>0</view>
-        <view>今日订单</view>
+        <view>{{homeDataNumberMoney}}</view>
+        <view>今日金额</view>
       </view>
       <view class='header_main'>
-        <view>0</view>
-        <view>今日订单</view>
+        <view>{{homeDataNumberFire}} </view>
+        <view>今日最火</view>
       </view>
     </view>
   </view>
 
   <!-- swiper -->
-  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-    <block wx:for="{{imgUrls}}">
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="{{show?'':'display:none;'}}">
+    <block wx:if="{{storeList}}" wx:for="{{storeList}}" wx:for-item="item">
       <swiper-item>
-        <view class='s-main'>
+        <view class='s-main' bindtap='termainlDetails' data-termail_id='{{item}}'>
           <view class="s-image">
-            <image src="{{item}}" class="slide-image" />
+            <image src="{{item.img_head + item.img_shop1}}" class="slide-image" />
           </view>
           <view class='s-value'>
-            <view>username</view>
-            <view>time</view>
-            <view>address</view>
+            <view style='font-size:.9rem;'>近期维护：{{item.store_name}}</view>
+            <view style="color:red;">维护时间：{{item.time}}</view>
+            <view>{{item.address}}</view>
           </view>
         </view>
       </swiper-item>
     </block>
+
   </swiper>
   <!-- buttom click -->
   <view class='but-main'>
     <view class='but-list' data-url="addTerminal" bindtap='buttonClick'>
-      <view class='icon-14 iconfont icon-shangdian1'></view>
+      <!-- <view class='icon-14 iconfont icon-shangdian1'></view> -->
+      <view class='click_icon'><image src='../../utils/image/home_20190409.png'></image></view>
       <view>新增终端</view>
     </view>
     <view class='but-list' data-url="addOrder" bindtap='buttonClick'>
-      <view class='icon-14 iconfont icon-dingdan3'></view>
+      <!-- <view class='icon-14 iconfont icon-dingdan3'></view> -->
+      <view class='click_icon'><image src='../../utils/image/order_20190409.png'></image></view>
       <view>新增订单</view>
     </view>
     <view class='but-list' data-url="getServer" bindtap='buttonClick'>
-      <view class='icon-14 iconfont icon-hezuo1'></view>
+      <!-- <view class='icon-14 iconfont icon-hezuo1'></view> -->
+      <view class='click_icon'><image src='../../utils/image/maintain_20190409.png'></image></view>
       <view>近期维护</view>
     </view>
     <view class='but-list' data-url="getSuccess" bindtap='buttonClick'>
-      <view class='icon-14 iconfont icon-chenggong'></view>
+      <!-- <view class='icon-14 iconfont icon-chenggong'></view> -->
+      <view class='click_icon'><image src='../../utils/image/termainal_20190409.png'></image></view>
       <view>成功终端</view>
     </view>
     <view class='but-list' data-url="getProduct" bindtap='buttonClick'>
-      <view class='icon-14 iconfont icon-shangpin1'></view>
+      <!-- <view class='icon-14 iconfont icon-shangpin1'></view> -->
+      <view class='click_icon'><image src='../../utils/image/product_20190409.png'></image></view>
       <view>全部商品</view>
+    </view>
+    <view class='but-list' data-url="getProduct">
+      <!-- <view class='icon-14 iconfont'></view> -->
+      <view class='click_icon'><image src='../../utils/image/server_20190409.png'></image></view>
+      <view>客服中心</view>
+      <contact-button type="default-light" class='server_kf' size="20" session-from="weapp">
+      </contact-button>
     </view>
   </view>
 

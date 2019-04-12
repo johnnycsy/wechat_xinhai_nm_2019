@@ -1,26 +1,29 @@
-<view class='main'>
+<view class='main' style='{{mainstyle}}'>
   <form class='from-main'>
     <view class="form-list">
-      <input name="input" placeholder="店铺名称" />
+      <input type='text' name="shopname" placeholder="店铺名称" data-name='store_name' bindblur='inputInformation' bindconfirm='inputInformations' confirm-hold='false' confirm-type='next' />
     </view>
     <view class="form-list">
-      <input name="input" placeholder="联系人姓名" />
+      <input type='text' name="username" placeholder="联系人姓名 " data-name='store_represent' bindconfirm='inputInformations' bindblur='inputInformation' confirm-hold='false' confirm-type='next' focus='{{focusUserName}}' />
     </view>
     <view class="form-list">
-      <input name="input" placeholder="联系电话" />
+      <input type='number' name="userphone" placeholder="联系电话" data-name='mobile' bindconfirm='inputInformations' bindblur='inputInformation' confirm-hold='false' confirm-type='next' focus='{{focusPhone}}' />
     </view>
     <view class="form-list">
-      <input name="input" placeholder="填写地址" value='{{myLocationAddress}}' />
+      <input type='text' name="useraddress" placeholder="填写地址" value='{{myLocationAddress}}' />
     </view>
     <view class="form-list">
-      <input name="input" placeholder="填写详情地址" value='{{myAddress}}' />
+      <input type='text' name="addresss" placeholder="填写详情地址" value='{{myAddress}}' />
       <text class='iconfont icon-ditudingwei' bindtap='getMapsAddressSelect'></text>
     </view>
     <view class="form-list">
-      <input name="input" placeholder="备注说明" />
+      <input name="input" placeholder="备注说明" data-name='remark' bindblur='inputInformation' />
     </view>
-    <view class='form-list'>
-      <view class='addcamera iconfont iconjia' bindtap='addCamera'>+</view>
+    <view class='form-list form-camera-image'>
+      <block wx:for="{{cameraVal}}" wx:for-index="index" wx:for-item="item">
+        <image class='camera-image' style='background-image:url(../../utils/image/upload-success.png)' src='{{item.src}}' data-index="{{index}}" bindlongtap='deleteCameraGo' bindtap='addCameraGo'></image>
+      </block>
+      <view class='addcamera iconfont iconjia' style='{{cameraSum>4?"display:none":""}}' bindtap='addCameraGo'>+</view>
     </view>
     <view class='form-subtitle'>选择信息</view>
     <view class="form-list">
@@ -45,7 +48,7 @@
       <view class="section">
         <picker bindchange="bindPickerArea" value="{{areaindex}}" range="{{areaArray}}">
           <view class="picker">
-            选择竞品商品：{{areaArray[areaindex]}}
+            选择店铺面积：{{areaArray[areaindex]}}
           </view>
         </picker>
       </view>
@@ -53,21 +56,32 @@
     <view class='form-list'>
       <view class='form-list-subtitle'>选择店铺标签</view>
       <view class='form-label'>
-        <view wx:for="{{labelArr}}" data-id="{{item.id}}" bindtap='labelClick'>{{item.name}}</view>
+        <block wx:for="{{labelArr}}" wx:for-index="index" wx:for-item="item">
+          <view data-index="{{index}}" class='{{item.labelSelecVal==true?"selectLabel":""}}' bindtap='labelClick'>{{item.name}}</view>
+        </block>
       </view>
     </view>
     <view class='form-list'>
       <view class='form-list-subtitle'>选择竞品商品</view>
       <view class='form-label'>
-        <view wx:for="{{cgoodsArr}}" data-id="{{item.id}}" bindtap='goodsClick'>{{item.name}}</view>
+        <block wx:for="{{cgoodsArr}}" wx:for-index="index" wx:for-item="item">
+          <view class='{{item.competeSelect==true?"selectLabel":""}}' data-index="{{index}}" bindtap='goodsClick'> {{item.name}} </view>
+        </block>
       </view>
     </view>
     <view id="map-main"></view>
   </form>
-  <view class='form-sub-go'>提交</view>
-  <view class='mapListSelectAddress' style='{{mapListSelectAddressStype==true?"display:block":""}}'>
+  <view class='form-sub-go' bindtap='addTerminal'>提交</view>
+  <!-- <view class='mapListSelectAddress' style='{{mapListSelectAddressStype==true?"display:block":""}}'>
     <block wx:for="{{mapPois}}" wx:for-index="indexKey" wx:for-item="item">
       <view bindtap='getSelectMapAddress' data-index='{{indexKey}}'>{{item.address}}</view>
     </block>
-  </view>
+  </view> -->
 </view>
+
+<camera device-position="back" flash="auto" binderror="error" class="camera" wx:if="{{cameraType==true}}">
+  <cover-view class='camera-but'>
+    <cover-view bindtap="getSotpPhoto"><cover-image src='../../utils/image/left.png'></cover-image></cover-view>
+    <cover-view bindtap="getTakePhoto"><cover-image src='../../utils/image/photograph.png'></cover-image></cover-view>
+  </cover-view>
+</camera>

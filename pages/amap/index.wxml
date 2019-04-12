@@ -1,0 +1,10 @@
+<!--pages/amap/index.wxml-->
+<map id="myMap" class='map_container' longitude="{{longitude}}" latitude="{{latitude}}" scale='16' polyline="{{polyline}}" show-location>
+  <cover-view class='mode-click'>
+    <cover-view class='{{drivingClass}}' data-mode='driving' bindtap='getUpdateMode'>驾车</cover-view>
+    <cover-view class='{{walkingClass}}' data-mode='walking' bindtap='getUpdateMode'>步行</cover-view>
+    <cover-view class='{{bicyclingClass}}' data-mode='bicycling' bindtap='getUpdateMode'>骑行</cover-view>
+    <cover-view class='{{transitClass}}' data-mode='transit' bindtap='getUpdateMode'>公交</cover-view>
+  </cover-view>
+  <cover-view>{{alert}}</cover-view>
+</map>

@@ -1,6 +1,6 @@
 <!--pages/termainlDetails/index.wxml-->
 <view class='main'>
-  <!-- header -->
+  <!-- header  -->
   <view class='header'>
     <view class='{{headerSelectClassLeft}}' data-select="0" bindtap='headerSelectClick'>店铺信息
       <view></view>
@@ -9,31 +9,37 @@
       <view></view>
     </view>
   </view>
-  <!-- details -->
+  <!-- details  -->
   <view class='detailsMain {{detailsTarget}}'>
     <view class='store-image'>
-      <view class='store-pic'>
-        <image src='{{storeImage}}'></image>
+      <view class='store-pic' style='background-image:url("{{storeImage}}")' bindtap='getShowImage'>
+        <!-- <image src='{{storeImage}}'></image> -->
       </view>
       <view class='store-maps'>
         <view class='store-type'>
           <view class='iconfont icon-shangdian1'></view>
-          <view class='store-types'>类型</view>
+          <view class='store-types' wx:if="{{channel_type==1}}">终端</view>
+          <view class='store-types' wx:elif="{{channel_type==2}}">批发</view>
+          <view class='store-types' wx:else="{{channel_type==3}}">超市</view>
         </view>
-        <view class='store-distance'>888公里</view>
+        <view class='store-distance'>{{distance}}公里</view>
       </view>
     </view>
     <view class='store-name'>
-      <view>店铺名称
-        <view class='iconfont icon-bianji1' bindtap='updateStoreClick'></view>
+      <view>{{storeName}}
+        <view class='iconfont icon-bianji1' bindtap='updateStoreClick' style='display:none;'></view>
       </view>
     </view>
     <view class='user-info'>
       <view class='user-code iconfont icon-version'> 编号：{{userCode}}</view>
       <view class='user-code iconfont icon-ditudingwei-copy'> 地址：{{userAddress}}</view>
       <view class='user-code iconfont icon-yonghu1'> 联系人：{{userName}}</view>
-      <view class='user-code iconfont icon-dianhua1'> 联系电话：{{userTel}}</view>
+      <view class='user-code iconfont icon-dianhua1' wx:if="{{mobile}}"> 联系电话：{{mobile}}</view>
+      <view class='user-code iconfont icon-dianhua1' wx:else> 联系电话：{{landline}}</view>
+      <view class='user-code iconfont icon-riqi'> 最近下单时间：{{(days>=0)?days+'天':"暂无下单时间"}}</view>
+      <view class='user-code iconfont icon-riqi'> 距离拜访：{{(remain_day=='无')?"暂未设置时间":remain_day+'天'}}</view>
     </view>
+
     <view class='user-but'>
       <view class='user-but-list section'>
         <picker mode="date" value="{{date}}" start="2015-09-01" end="2030-09-01" bindchange="userButSee">
@@ -61,47 +67,51 @@
     <view class='header_order'>
       <view class='horderlist'>
         <view class='hordermain'>
-          <view>总数量（只）</view>
-          <view>888</view>
+          <view>总数量(只)</view>
+          <view wx:if="{{countStore.quantity}}">{{countStore.quantity}}</view>
+          <view wx:else>0</view>
         </view>
       </view>
       <view class='horderlist'>
         <view class='hordermain'>
-          <view>总数量（只）</view>
-          <view>888</view>
+          <view>当年数量(只)</view>
+          <view wx:if="{{countStore.year_quantity}}">{{countStore.year_quantity}}</view>
+          <view wx:else>0</view>
         </view>
       </view>
       <view class='horderlist'>
         <view class='hordermain'>
-          <view>总数量（只）</view>
-          <view>888</view>
+          <view>总金额</view>
+          <view wx:if="{{countStore.money}}">{{countStore.money}}</view>
+          <view wx:else>0</view>
         </view>
       </view>
       <view class='horderlist'>
         <view class='hordermain'>
-          <view>总数量（只）</view>
-          <view>888</view>
+          <view>当年累计金额</view>
+          <view wx:if="{{countStore.year_money}}">{{countStore.year_money}}</view>
+          <view wx:else>0</view>
         </view>
       </view>
     </view>
     <!-- order title -->
     <view class='order-title'>订单列表</view>
     <!-- 订单列表 -->
-    <block wx:for="{{orderListArr}}">
-      <view class='order-list-main'>
+    <block wx:for="{{orderListArr}}" wx:for-item="item">
+      <view class='order-list-main' data-stock-no="{{item.stock_on}}">
         <view class='order-list-left'>
           <view class='order-l-left-table'>
-            <view>数量：{{item.orderOneNumber}}</view>
-            <view>金额：{{item.orderOneMoney}}</view>
+            <view>数量：{{item.all_number}}</view>
+            <view>金额：{{item.all_money}}</view>
           </view>
-          <view>时间：{{item.orderOneTime}}</view>
+          <view>时间：{{item.stock_time}}</view>
         </view>
         <view class='order-list-right'>
           <view>
-            <view class='order-list-but' bindtap='orderListEide' data-order_id="{{item.orderListId}}" data-order_time="{{item.orderOneTime}}" style='display:{{item.orderTimeExceed==false?"none":""}}'>
+            <view class='order-list-but' bindtap='orderListEide' data-timer='{{item.stock_times}}' data-order_id="{{item.stock_id}}" data-stock_no='{{item.stock_no}}' style="display:{{item.stock_times>1?'none':''}}">
               <text>编辑</text>
             </view>
-            <view class='order-list-but' bindtap='orderListLook' data-order_id="{{item.orderListId}}" data-order_time="{{item.orderOneTime}}">
+            <view class='order-list-but' bindtap='orderListLook' data-stock_no='{{item.stock_no}}' data-type='{{item.pay_method}}' data-timer='999' data-order_id="{{item.stock_id}}">
               <text>详情</text>
             </view>
           </view>

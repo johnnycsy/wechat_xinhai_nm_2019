@@ -1,4 +1,4 @@
-<!--pages/my/index.wxml-->
+<!--pages/my/index.wxml  -->
 <view class='header'>
   <!-- user -->
   <view class='header-user'>
@@ -10,33 +10,67 @@
       <view class='header-user-info-tel'>{{userTel}}</view>
     </view>
   </view>
-  <!-- user data -->
-  <view class='header-udata'>
-    <view class='header-ud-list'>
-      <view>{{successTerminal}}</view>
-      <view>成功终端</view>
+</view>
+<!-- 选择器 -->
+<view class="section">
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker section__title">
+      {{array[index]}}
+      <view class='icon-downs-go'>
+        <text class='iconfont icon-Right '></text>
+      </view>
     </view>
-    <view class='header-ud-list'>
-      <view>{{failureTerminal}}</view>
-      <view>成功终端</view>
-    </view>
-    <view class='header-ud-list'>
-      <view>{{orderSumMoney}}</view>
-      <view>成功终端</view>
-    </view>
+  </picker>
+</view>
+<view class='my-subtitle-alert'>今日数据暂未纳入统计</view>
+<!-- user data -->
+<view class='my-title'>· 终端统计</view>
+<view class='header-udata'>
+  <view class='header-ud-list-s'>
+    <view>成功终端</view>
+    <view>{{successTerminal?successTerminal:0}}</view>
+  </view>
+  <view class='header-ud-list-s'>
+    <view>失败终端</view>
+    <view>{{failureTerminal?failureTerminal:0}}</view>
   </view>
 </view>
-
+<view class='my-title'>· 销量统计</view>
+<view class='header-udata'>
+  <view class='header-ud-list'>
+    <view>{{sale_order_num?sale_order_num:0}}</view>
+    <view>总订单数</view>
+  </view>
+  <view class='header-ud-list'>
+    <view>{{sale_num?sale_num:0}}</view>
+    <view>总销售数</view>
+  </view>
+  <view class='header-ud-list'>
+    <view>{{orderSumMoney?orderSumMoney:0}}</view>
+    <view>总销售额</view>
+  </view>
+</view>
+<view class='my-title'>· 欠款统计</view>
+<view class='header-udata'>
+  <view class='header-ud-list-s'>
+    <view>欠款商户</view>
+    <view>{{debt_num?debt_num:0}}</view>
+  </view>
+  <view class='header-ud-list-s'>
+    <view>欠款金额</view>
+    <view>{{debt_money?debt_money:0}}</view>
+  </view>
+</view>
 <!-- operation list -->
-<view class='operation-list'>
+<view class='operation-list' style='display:none'>
   <view class='operation-val' bindtap='getMyClickData'>
     <text class='iconfont icon-shuju'></text>
     <text class=''>业务员数据</text>
-    <text class='iconfont icon-Right'></text>    
+    <text class='iconfont icon-Right'></text>
   </view>
   <view class='operation-val' bindtap='getMyClickAbout'>
     <text class='iconfont icon-shibai2'></text>
-        <text class=''>关于新海</text>
-    <text class='iconfont icon-Right'></text>   
+    <text class=''>关于新海</text>
+    <text class='iconfont icon-Right'></text>
   </view>
 </view>

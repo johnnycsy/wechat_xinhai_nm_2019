@@ -6,23 +6,23 @@
   align-content: center;
   height: 100%;
   width: 100%;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .main-wire {
   position: fixed;
   top: 0;
-  left: 20%;
+  left: 30%;
   bottom: 0;
   border-left: 0.01rem solid #f7f7fa;
 }
 
 .shop-left {
-  width: 20%;
+  width: 30%;
 }
 
 .shop-right {
-  width: 80%;
+  width: 70%;
 }
 
 .show-title {
@@ -74,9 +74,18 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding: 0.25rem 0;
+  padding: 0.5rem 0;
+  position: relative;
 }
-
+.pro-icon-number{
+  position: absolute;
+  top: 0;
+  right: .5rem;
+  color: red;
+  display: inline-block;
+  border-radius: .01rem solid #F0F0F0;
+  font-size: .5rem;
+}
 .pro-class-list >view:active {
   color: red;
 }
@@ -84,9 +93,9 @@
 .provm {
   position: fixed;
   top: 2rem;
-  left: 20%;
+  left: 30%;
   right: 0;
-  bottom: 2rem;
+  bottom: 2.5rem;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -141,10 +150,13 @@
 
 .pro-vm-but {
   margin-top: 0.5rem;
+  line-height: 1.6rem;
 }
-
+.pro-vm-input>input{
+  font-size: .8rem;
+}
 .pro-vm-but .iconfont {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
 }
 
 .pro-vm-input>input {
@@ -159,13 +171,14 @@
   bottom: 0;
   right: 0;
   left: 20%;
-  height: 2rem;
-  line-height: 2rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
   padding: 0 0 0 0.5rem;
   display: flex;
   justify-content: center;
   align-content: center;
   border-top: 0.01rem solid #f7f7fa;
+  background: white;
 }
 
 .cart-submit>view:first-child {

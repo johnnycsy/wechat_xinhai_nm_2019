@@ -1,0 +1,7 @@
+/* pages/addressSelect/index.wxss */
+.mapListSelectAddress{
+  padding: .5rem;
+}
+.mapListSelectAddress view{
+  padding: .5rem 0;
+}

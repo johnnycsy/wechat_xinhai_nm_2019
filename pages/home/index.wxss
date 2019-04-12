@@ -1,21 +1,25 @@
+page {
+  background: #f1f5f8;
+}
 
 .header {
   background: #5071ba;
   color: #fff;
+  min-height: 6.5rem;
 }
 
 .header_user {
   line-height: 1rem;
-  font-size: 0.7rem;
-  padding: 0.4rem;
+  font-size: 1rem;
+  padding: 0.6rem 0.5rem;
 }
 
 .header_statistics {
   display: flex;
   justify-content: center;
   align-content: center;
-  font-size: 0.7rem;
-  padding-bottom: 1rem;
+  font-size: 0.8rem;
+  padding: 0.5rem 0 0.5rem 0;
 }
 
 .header_main {
@@ -33,13 +37,19 @@
 }
 
 .header_main>view:first-child {
-  font-size: 0.9rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.header_statistics>.header_main:last-child>view:first-child {
+  font-size: 0.6rem;
 }
 
 .s-main {
   display: flex;
   justify-content: center;
   align-content: center;
+  font-size: 0.7rem;
 }
 
 .slide-image {
@@ -60,18 +70,22 @@
 
 .but-main {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-content: center;
   flex-wrap: wrap;
-  margin-top: 0.5rem;
+  padding-top: 1rem;
   border-top: 0.1rem solid #f0f0f0;
 }
 
 .but-list {
-  width: 30%;
-  margin: 0.5rem 1.5%;
-  font-size: 0.7rem;
+  width: 25%;
+  margin: 0.5rem 3%;
+  font-size: 0.8rem;
   text-align: center;
+  position: relative;
+  background: #fff;
+  padding-bottom: 0.5rem;
+  border-radius: 0.25rem;
 }
 
 .but-list>.iconfont {
@@ -79,8 +93,35 @@
   height: 2rem;
   margin: auto;
   line-height: 2rem;
-  background: #83A1E3;
-  color: #FFFFFF;
+  background: #83a1e3;
+  color: #fff;
   border-radius: 100%;
   border: 0.1rem solid #f0f0f0;
+}
+
+.server_kf {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  line-height: 2.5rem;
+  opacity: 0;
+}
+
+/* 20190409 */
+
+swiper {
+  padding: 0 0 .7rem 0;
+  background: #fff;
+  box-shadow: 0 0.05rem 0.5rem 0.25rem rgba(80, 136, 230, 0.1);
+}
+
+.click_icon {
+  padding: 0.5rem;
+}
+
+.click_icon image {
+  width: 2rem;
+  height: 2rem;
 }

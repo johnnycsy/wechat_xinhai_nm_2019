@@ -1,0 +1,8 @@
+<!--pages/addressSelect/index.wxml-->
+<view>
+  <view class='mapListSelectAddress' style='{{mapListSelectAddressStype==true?"display:block":""}}'>
+    <block wx:for="{{mapPois}}" wx:for-index="indexKey" wx:for-item="item">
+      <view bindtap='getSelectMapAddress' data-index='{{indexKey}}'>{{item.address}}</view>
+    </block>
+  </view>
+</view>

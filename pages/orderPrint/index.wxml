@@ -1,7 +1,15 @@
 <!--pages/orderPrint/index.wxml-->
 <view class='header'>
+  <!-- <view class='header-but' bindtap='getPrintData'>
+    <text>打印订单</text> 
+  </view> -->
+  <view class='header-but'>
+    <text>订单号：{{orderCode}}</text>
+  </view>
+</view>
+<view class='header'>
   <view class='header-but' bindtap='getPrintData'>
-    <text>打印订单</text>
+    <text>订单详情</text>
   </view>
   <view class='header-but' bindtap='getReturn'>
     <text>返回首页</text>

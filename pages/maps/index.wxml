@@ -1,3 +1,11 @@
 <!--pages/maps/index.wxml-->
-<map id="maps" class='maps' show-location />
-<button type="primary" class='getMyMaps iconfont icon-icon-didian' bindtap="moveToLocation"></button>
+<map id="maps" class='maps' markers="{{markers}}" longitude="{{longitude}}" latitude="{{latitude}}" show-location>
+  <cover-view type="primary" class='getMyMaps' bindtap="moveToLocation">
+    <cover-image src='../../utils/image/map_withr.png'></cover-image>
+  </cover-view>
+  <cover-view class='mapfonts'>
+    <cover-view class='{{search_typea}}' data-search="0" bindtap='getSearch'>小店</cover-view>
+    <cover-view class='{{search_typeb}}' data-search="1" bindtap='getSearch'>超市</cover-view>
+    <cover-view class='{{search_typec}}' data-search="2" bindtap='getSearch'>烟草</cover-view>
+  </cover-view>
+</map>

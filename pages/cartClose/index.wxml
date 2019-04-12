@@ -1,4 +1,4 @@
-<!--pages/cartClose/index.wxml-->
+<!--pages/cartClose/index.wxml -->
 <view class='main'>
   <block wx:for="{{cartAll}}" wx:for-index="indexKey" wx:for-item="item">
     <view class='pro-list'>
@@ -7,7 +7,7 @@
       </view>
       <view class="pro-val">
         <view class='pro-title'>{{item.proName}}</view>
-        <view class='pro-subtitle'>{{item.proClassId}}</view>
+        <view class='pro-subtitle'><input value='￥{{item.proMoney}}' data-index='{{indexKey}}' bindblur='getUpdateMoney'></input></view>
         <view class='pro-num'>x {{item.proIdNumber}}</view>
         <view class='pro-del iconfont icon-lajitong' bindtap='cartDeleteProduct' data-index="{{indexKey}}"></view>
       </view>

@@ -6,9 +6,11 @@
       <view class='header-left-title'>商品型号</view>
     </view>
     <view class='pro-class-list'>
-      <view class='{{selectTargetClick==""?"selectDefault":""}}' data-id="0" bindtap='proClassButClick'>全部</view>
+      <view class='{{selectTargetClick==""?"selectDefault":""}}' data-id="" bindtap='proClassButClick'>全部</view>
       <block wx:for="{{proClassList}}" wx:for-index="itemIdx">
-        <view class='{{selectTargetClick==item.proClassId?"selectDefault":""}}' data-id="{{item.proClassId}}" bindtap='proClassButClick'>{{item.proClassName}}</view>
+        <view class='{{selectTargetClick==item.proClassId?"selectDefault":""}}' data-id="{{item.proClassId}}" bindtap='proClassButClick'>{{item.proClassName}}
+        <text class='pro-icon-number'>{{item.proClassSum}}</text>
+        </view>
       </block>
     </view>
   </view>
@@ -17,11 +19,18 @@
   <!-- right -->
   <view class='shop-right'>
     <view class='show-title'>
-      <view class='header-right-but' data-type="0" data-direction="{{selectDirectionLeft}}" bindtap='showSelectButClick'>商品售价
+      <!-- <view class='header-right-but' data-type="0" data-direction="{{selectDirectionLeft}}" bindtap='showSelectButClick'>商品售价
         <text class='{{showSelectButLeft}} iconfont icon-paixu'></text>
       </view>
       <view class='header-right-but' data-type="1" data-direction="{{selectDirectionRight}}" bindtap='showSelectButClick'>商品库存
         <text class='{{showSelectButRight}} iconfont icon-paixu'></text>
+      </view> -->
+      
+      <view class='header-right-but' data-type="0" bindtap='showSelectButClick1'>商品售价
+        <text class='{{showSort==0?(showType==1?"select-down":"select-up"):""}} iconfont icon-paixu'></text>
+      </view>
+      <view class='header-right-but' data-type="1" bindtap='showSelectButClick1'>商品库存
+        <text class='{{showSort==1?(showType==1?"select-down":"select-up"):""}} iconfont icon-paixu'></text>
       </view>
     </view>
     <!-- product list -->

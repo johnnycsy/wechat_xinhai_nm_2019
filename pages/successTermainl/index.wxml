@@ -1,6 +1,6 @@
 <!--pages/successTermainl/index.wxml-->
 <view class='main'>
-  <!-- header click -->
+  <!-- header click-->
   <view class='header_select'>
     <view bindtap='selectClick' data-state="{{timeNumber}}" data-type='timeSort'>时间
       <view class='{{timeSort}} iconfont icon-paixu1'></view>
@@ -20,18 +20,24 @@
   </view>
   <!-- section -->
   <view class='section_main'>
-    <view class='section'>
+    <view class='section' wx:for='{{storeList}}' wx:for-item='item'>
       <!-- section value start -->
-      <view class='se-value' bindtap='termainlDetails' data-termail_id="0">
+      <view class='se-value'  bindtap='termainlDetails' data-termail_id ='{{item}}' >
         <view class='se-vmain'>
-          <view class='se-image'>image</view>
+          <view class='se-image'>
+             <image src='{{item.img_head + item.img_shop1}}'></image> 
+          </view>
           <view class='se-val'>
             <view class='se-title'>
-              <view class="se-subtitle">title</view>
-              <view class="se-maps">888公里</view>
+              <view class="se-subtitle">{{item.store_name}}</view>
+              <view class="se-maps">{{item.distance}}公里</view>
             </view>
-            <view class='se-mintitle iconfont icon-label'> text</view>
-            <view class='se-address iconfont icon-dizhi'> address</view>
+            <view class='se-mintitle iconfont icon-label'> 编号：{{item.store_no}}</view>
+            <view class='se-address iconfont icon-dizhi'> {{item.address}}</view>
+            <view class='se-address times-right' wx:if="{{sort_name=='时间'}}"> {{item.add_time}}</view>
+            <view class='se-address times-right' wx:elif="{{sort_name=='销量'}}"> {{item.number?item.number:0}}</view>
+            <view class='se-address times-right' wx:elif="{{sort_name=='销售额'}}"> {{item.money?item.money:0}}元</view>
+            <view class='se-address times-right' wx:elif="{{sort_name=='欠款'}}"> {{item.debt?item.debt:0}}元</view>
           </view>
         </view>
       </view>

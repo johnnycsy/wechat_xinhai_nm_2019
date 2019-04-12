@@ -1,13 +1,18 @@
+page {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .main {
   padding-bottom: 4rem;
 }
 
 .from-main {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .from-main input {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .form-list {
@@ -40,7 +45,7 @@
   flex-wrap: wrap;
 }
 
-.form-label>view {
+.form-label view {
   width: 30%;
   margin: 0.2rem 1%;
   text-align: center;
@@ -48,16 +53,40 @@
   padding: 0.3rem 0;
 }
 
-.addcamera {
-  width: 3rem;
-  height: 3rem;
+.form-camera-image {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.addcamera, .camera-image {
+  width: 4rem;
+  height: 4rem;
+  line-height: 4rem;
+  text-align: center;
   border: 0.01rem solid #f0f0f0;
   font-size: 2rem;
-  display: flex;
-  justify-content: center;
-  align-content: center;
+  display: inline-block;
   color: #bfbfbf;
   background: white;
+  margin-right: 0.5rem;
+}
+
+.camera-image {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.camera {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
 }
 
 .form-sub-go {
@@ -87,7 +116,7 @@
   overflow: auto;
   display: none;
   background: white;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   z-index: 999;
 }
 
@@ -102,4 +131,44 @@
 
 .mapListSelectAddress>view:last-child {
   border-bottom: none;
+}
+
+.form-label .selectLabel {
+  border: 0.01rem solid red;
+  color: red;
+}
+
+.camera-but {
+  position: fixed;
+  /* z-index: 9; */
+  left: 0;
+  right: 0;
+  bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.camera-but cover-view {
+  width: 4rem;
+  height: 4rem;
+  /* line-height: 4.5rem; */
+  font-size: 1.5rem;
+  border-radius: 100%;
+  background-color: #00b26a;
+  color: #fff;
+  text-align: center;
+  margin: 0 15%;
+  overflow: hidden;
+}
+
+.camera-but cover-view:first-child {
+  background-color: #cbcbcc;
+  color: #808080;
+}
+
+.camera-but cover-image {
+  width: 2rem;
+  height: 2rem;
+  padding: 25%;
 }

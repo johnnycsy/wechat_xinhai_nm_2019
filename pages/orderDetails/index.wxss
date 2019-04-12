@@ -60,7 +60,7 @@
   text-align: center;
   min-width: 3rem;
   max-width: 5rem;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .cart-but {
@@ -79,7 +79,7 @@
   text-align: right;
   width: 60%;
   background: #f4f4f4;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   padding-right: 0.5rem;
 }
 
@@ -96,7 +96,7 @@
   display: table;
   width: 95%;
   margin: 1rem auto auto auto;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .pay-main>view {

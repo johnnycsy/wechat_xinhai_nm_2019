@@ -23,7 +23,7 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-      console.log('===========================' + 1)
+      // console.log('===========================' + 1)
       _this.getUserOpenid();
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -33,7 +33,7 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
-        console.log('===========================' + 2)
+        // console.log('===========================' + 2)
         _this.getUserOpenid();
       }
     } else {
@@ -45,7 +45,7 @@ Page({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
-          console.log('===========================' + 3)
+          // console.log('===========================' + 3)
           _this.getUserOpenid();
         }
       })
@@ -58,7 +58,7 @@ Page({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log("自动获取数据======================================》" + JSON.stringify(res))
+        // console.log("自动获取数据======================================》" + JSON.stringify(res))
         wx.request({
           url: apiSrc + 'user/wxAuthor.do',
           method: "POST",
@@ -71,17 +71,26 @@ Page({
             'content-type': 'application/x-www-form-urlencoded'
           },
           success(res) {
-            console.log(res)
-            wx.setStorage({
-              key: 'openid',
-              data: res.data.openid,
-            })
-            //进行授后登录
-            _this.getUserInfo(res.data.openid);
+            // console.log(res)
+
+            if (res.data.openid) {
+              wx.setStorage({
+                key: 'openid',
+                data: res.data.openid,
+              })
+              //进行授后登录
+              _this.getUserInfo(res.data.openid);
+            } else {
+              wx.showToast({
+                title: '温馨提示:授权登录失败！',
+                icon: 'none'
+              })
+            }
+
           },
           fail(error) {
             wx.showToast({
-              title: '服务器异常：' + JSON.stringify(error),
+              title: '服务器异常：' + JSON.stringify(error.errMsg),
               icon: 'none',
             })
           }
@@ -90,17 +99,17 @@ Page({
     })
   },
   //用户信息分解 
-  getUserInfo: function(e) {
-    console.log('用户分解=============================================')
-    // console.log(e)
+  getUserInfo: function(openid) {
+    // console.log('用户分解=============================================')
+    // console.log(openid)
     let userInfo = app.globalData.userInfo
-    console.log(userInfo)
+    // console.log(userInfo)
     if (userInfo == null || typeof userInfo == "undefined") {
       // _this.onLoad();
       app.getUserSetting();
       return false;
     }
-    if (typeof e == "undefined") {
+    if (typeof openid == "undefined") {
       wx.showToast({
         title: '温馨提示：服务器更新中',
         icon: 'none'
@@ -111,11 +120,11 @@ Page({
       userInfo: app.globalData.userInfo,
       hasUserInfo: true
     })
-    if (e.type) {
+    if (openid.type) {
       // _this.onLoad();
       _this.getUserOpenid();
     } else {
-      this.getUserLogin(e); //进行授后登录
+      this.getUserLogin(openid); //进行授后登录
     }
   },
   //用户登录 [requery]
@@ -126,8 +135,8 @@ Page({
     })
     let apiSrc = app.globalData.appApi + "user/accessWx.do",
       openidStorage = wx.getStorageSync('openid');
-    console.log(openidStorage)
-    console.log(openid)
+    // console.log(openidStorage)
+    // console.log(openid)
     if (openidStorage != '' || openid != '') {
       var dataPost = {
         data: JSON.stringify({
@@ -152,7 +161,7 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success(res) {
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data.code === 0) {
           wx.setStorage({
             key: 'access_token',

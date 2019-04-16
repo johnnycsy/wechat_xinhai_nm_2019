@@ -257,9 +257,11 @@ Page({
       })
       return false;
     }
+    // latitude
+    // longitude
     wx.navigateTo({
-      url: '../scanQr/index?termail_id=' + this.data.termail_id,
+      url: '../scanQr/index?termail_id=' + this.data.termail_id + '&lat=' + this.data.latitude + '&lon=' + this.data.longitude,
     })
   }
-  
+
 })

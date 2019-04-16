@@ -1,2 +1,60 @@
 <!--pages/scanQr/index.wxml-->
-<text>pages/scanQr/index.wxml</text>
+<view>
+  <!-- 店铺信息 -->
+  <view class='show_store'>
+    <view class='store_img' style='background-image:url({{termailPic}})'></view>
+    <view class='store_info'>
+      <view>{{termailName}}</view>
+      <view>{{termailAddress}}</view>
+    </view>
+  </view>
+  <!-- 商品列表 -->
+  <view class='show_list'>
+    <view>商品列表</view>
+    <view class='show_pro' wx:for='{{productAll}}' wx:for-index="index" wx:for-item="item">
+      <view class='show_pro_image'></view>
+      <view class='show_pro_info'>
+        <view class='show_pro_list'>{{item.proName}}</view>
+        <view class='show_pro_list show_pro_text'>
+          <view data-index='{{index}}'>数量：{{item.proNumber}}
+            <picker bindchange="getOpenConfirm" data-index='{{index}}' value="{{proNumberSelectIndex}}" range="{{proNumberSelect}}">
+              <image src='../../utils/image/update_20190413.png'></image>
+            </picker>
+          </view>
+          <view>单价：{{item.proPrice}}元</view>
+        </view>
+      </view>
+      <view class='show_pro_delete' bindtap='getDeleteStart' data-index='{{index}}'>
+        <image src='../../utils/image/delete_20190413.png'></image>
+      </view>
+    </view>
+    <view class='show_but'>
+      <view class='show_but_scan' bindtap='getScanOne'>
+        <image src='../../utils/image/scan_20190411.png'></image>单独扫码</view>
+      <view class='show_but_scan' bindtap='getScanEven'>
+        <image src='../../utils/image/scan_20190411.png'></image>连续扫码</view>
+    </view>
+  </view>
+  <!-- 支付方式 -->
+  <view class="weui-cells weui-cells_after-title pay_main">
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">支付方式</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="getPaySelect" value="{{paySelectIndex}}" range="{{paySelect}}">
+          <view class="weui-select">{{paySelect[paySelectIndex]}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class='foodermain'>
+    <view class='fooder_left'>
+      <view>共计：{{sumPrice}} 元</view>
+      <view>共{{sumKind}}种{{sumPackage}}件商品</view>
+    </view>
+    <view class='fooder_but' bindtap='getOrderSubmit'>提交订单</view>
+  </view>
+
+</view>

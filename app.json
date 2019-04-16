@@ -17,11 +17,12 @@
     "pages/server/index",
     "pages/addressSelect/index",
     "pages/amap/index",
-    "pages/scanQr/index"
+    "pages/scanQr/index",
+    "pages/continuous/index"
   ],
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序位置接口"
+      "desc": "你的位置信息将用于信息查询使用"
     }
   },
   "window": {

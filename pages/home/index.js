@@ -99,10 +99,10 @@ Page({
       'content-type': 'application/x-www-form-urlencoded',
       'access_token': access_token
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       if (res.data.code === 0) {
         var storeList = res.data.storeMaintainList
-        console.log(storeList)
+        // console.log(storeList)
         if (typeof storeList == "undefined") {
           return false;
         }

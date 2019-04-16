@@ -1,0 +1,3 @@
+<!--pages/continuous/index.wxml-->
+<text wx:for="{{qrArr}}" wx:for-index="index" wx:for-item="item" wx:key='key'>{{item}}</text>
+<button bindtap='getQrQuery'>确认返回</button>

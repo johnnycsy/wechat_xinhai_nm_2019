@@ -1,1 +1,163 @@
 /* pages/scanQr/index.wxss */
+
+.show_store {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 95%;
+  margin: 0.25rem auto;
+}
+
+.store_info {
+  width: 80%;
+  padding: 0.25rem 0;
+}
+
+.store_img {
+  width: 4rem;
+  height: 4rem;
+  margin-right: 0.25rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.store_info view:last-child {
+  font-size: 0.8rem;
+}
+
+.show_list {
+  border-top: 0.25rem solid #f5f5f5;
+  border-bottom: 0.25rem solid #f5f5f5;
+  padding: 0 0.25rem;
+}
+
+.show_list>view {
+  padding: 0.25rpx;
+  border-top: 0.01rem solid #f5f5f5;
+  border-bottom: 0.01rem solid #f5f5f5;
+}
+
+.show_list>.show_but {
+  display: table;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.show_but_scan {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  color: #83a1e3;
+  font-size: 0.8rem;
+}
+
+.show_but_scan:first-child {
+  border-right: 0.01rem solid #f5f5f5;
+}
+
+.show_but>view {
+  padding: 0.5rem 0;
+}
+
+.show_but_scan image {
+  margin-right: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem 0;
+  vertical-align: middle;
+}
+
+.show_pro {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+}
+
+.show_pro_info {
+  width: 75%;
+}
+
+.show_pro_image {
+  width: 5rem;
+  height: 5rem;
+  margin-right: 0.25rem;
+}
+
+.show_pro_list {
+  width: 100%;
+  padding: 0.25rem;
+}
+
+.show_pro_text {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  font-size: 0.8rem;
+}
+
+.show_pro_text view {
+  width: 50%;
+  white-space: nowrap;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+}
+
+.show_pro_delete {
+  display: inline-block;
+  margin: auto auto auto 0.5rem;
+}
+
+.show_pro_delete image {
+  width: 2rem;
+  height: 2rem;
+}
+
+.show_pro_text image {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.25rem;
+}
+
+.pay_main {
+  width: 100%;
+}
+
+.pay_main .weui-select {
+  text-align: right;
+}
+
+.foodermain {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-top: 0.01rem solid #f5f5f5;
+  font-size: 0.8rem;
+  display: table;
+  width: 100%;
+}
+
+.foodermain > view {
+  display: table-cell;
+  padding: 0.25rem;
+  vertical-align: middle;
+}
+
+.fooder_left {
+  width: 65%;
+  text-align: right;
+  background: #f4f4f4;
+}
+
+.fooder_but {
+  width: 35%;
+  font-size: 0.8rem;
+  text-align: center;
+  background: #83a1e3;
+  color: #fff;
+}

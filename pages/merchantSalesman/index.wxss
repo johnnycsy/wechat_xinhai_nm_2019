@@ -1,0 +1,64 @@
+/* pages/merchantSalesman/index.wxss */
+
+page, .page, .page__bd {
+  height: 100%;
+  background: white;
+}
+
+.page__bd {
+  padding-bottom: 0;
+}
+
+.weui-tab__content {
+  /* padding-top: 60px; */
+  text-align: center;
+}
+
+.list_v {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 0.5rem 0;
+  border-bottom: 0.01rem solid #f0f0f0;
+}
+
+.lv_title {
+  width: 70%;
+}
+
+.lv_pic {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 0.5rem;
+  overflow: hidden;
+  border-radius: 100%;
+  border: 0.01rem solid #f0f0f0;
+}
+
+.lv_icon {
+  width: 1rem;
+  height: 4rem;
+  line-height: 4rem;
+}
+
+.lv_icon image {
+  width: 1rem;
+  height: 1rem;
+  transform: rotate(180deg);
+}
+
+.lv_title {
+  text-align: left;
+}
+
+.lv_money {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 0.7rem;
+}
+
+.lv_money>view {
+  width: 50%;
+  line-height: 2rem;
+}

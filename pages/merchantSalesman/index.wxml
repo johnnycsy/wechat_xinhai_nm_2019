@@ -1,0 +1,68 @@
+<!--pages/merchantSalesman/index.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+          <!-- start -->
+          <navigator class='list_v' url='../merchantSalesmanParticulars/index?id=0'>
+            <view class='lv_pic'></view>
+            <view class='lv_title'>
+              <view class='lv_name'>姓名</view>
+              <view class='lv_money'>
+                <view>销售金额：{{}}</view>
+                <view>销售量：{{}}</view>
+              </view>
+            </view>
+            <view class='lv_icon'>
+              <image src='../../utils/image/left.png'></image>
+            </view>
+          </navigator>
+          <!-- end -->
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+          <!-- start -->
+          <navigator class='list_v' url='../merchantSalesmanParticulars/index?id=0'>
+            <view class='lv_pic'></view>
+            <view class='lv_title'>
+              <view class='lv_name'>姓名</view>
+              <view class='lv_money'>
+                <view>销售金额：{{}}</view>
+                <view>销售量：{{}}</view>
+              </view>
+            </view>
+            <view class='lv_icon'>
+              <image src='../../utils/image/left.png'></image>
+            </view>
+          </navigator>
+          <!-- end -->
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+          <!-- start -->
+          <navigator class='list_v' url='../merchantSalesmanParticulars/index?id=0'>
+            <view class='lv_pic'></view>
+            <view class='lv_title'>
+              <view class='lv_name'>姓名</view>
+              <view class='lv_money'>
+                <view>销售金额：{{}}</view>
+                <view>销售量：{{}}</view>
+              </view>
+            </view>
+            <view class='lv_icon'>
+              <image src='../../utils/image/left.png'></image>
+            </view>
+          </navigator>
+          <!-- end -->
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -36,11 +36,14 @@ Page({
               lon: longitude
             })
             that.getDataList()
+            setInterval(function() {
+              that.getDataList()
+              that.getStatistics()
+            }, 60000)
           }
         })
       }
     })
-    this.getStatistics()
   },
   buttonClick(event) {
     var target = event.currentTarget.dataset.url;
@@ -120,9 +123,11 @@ Page({
             show: false
           })
         }
-        setInterval(function() {
-          that.getDataList()
-        }, 30000);
+
+        // setInterval(function() {
+        //   that.getDataList()
+        // }, 30000);
+
       } else {
         that.setData({
           show: false

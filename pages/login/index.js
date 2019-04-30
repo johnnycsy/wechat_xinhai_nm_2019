@@ -63,7 +63,7 @@ Page({
       })
       return false;
     }
-    console.log(userInfo)
+    // console.log(userInfo)
     var nick_name = app.globalData.userInfo.nickName; //微信昵称
     var sex = app.globalData.userInfo.gender; //性别
     var province = app.globalData.userInfo.province; //省
@@ -85,7 +85,7 @@ Page({
     }, {
       'content-type': 'application/x-www-form-urlencoded'
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       if (typeof res.data == "undefined") {
         wx.showToast({
           title: '温馨提示：远程连接失败',
@@ -107,9 +107,18 @@ Page({
           key: 'dict',
           data: res.data.dict
         })
-        wx.switchTab({
-          url: '../home/index'
-        })
+        // wx.switchTab({
+        //   url: '../home/index'
+        // })
+        if (res.data.user.type == 2) {
+          wx.reLaunch({
+            url: '../merchant/index',
+          })
+        } else {
+          wx.reLaunch({
+            url: '../home/index',
+          })
+        }
       }
       else if (res.data.code === 6000) {
         wx.showToast({
@@ -264,9 +273,10 @@ Page({
           key: 'dict',
           data: res.data.dict
         })
-        wx.switchTab({
-          url: '../home/index'
-        })
+        // wx.switchTab({
+        //   url: '../home/index'
+        // })
+        app.getUserLoginSuccess(res.data.user.type)
       } else {
         wx.showToast({
           title: '绑定失败：' + res.data.msg,

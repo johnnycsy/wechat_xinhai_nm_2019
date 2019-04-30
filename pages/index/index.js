@@ -72,8 +72,7 @@ Page({
           },
           success(res) {
             // console.log(res)
-
-            if (res.data.openid) {
+            if (res.data.openid != '') {
               wx.setStorage({
                 key: 'openid',
                 data: res.data.openid,
@@ -100,10 +99,7 @@ Page({
   },
   //用户信息分解 
   getUserInfo: function(openid) {
-    // console.log('用户分解=============================================')
-    // console.log(openid)
     let userInfo = app.globalData.userInfo
-    // console.log(userInfo)
     if (userInfo == null || typeof userInfo == "undefined") {
       // _this.onLoad();
       app.getUserSetting();
@@ -121,26 +117,27 @@ Page({
       hasUserInfo: true
     })
     if (openid.type) {
-      // _this.onLoad();
-      _this.getUserOpenid();
+      _this.getUserOpenid()
     } else {
-      this.getUserLogin(openid); //进行授后登录
+      _this.getUserLogin(openid) //进行授后登录
     }
   },
   //用户登录 [requery]
   getUserLogin: function(openid) {
+    if (typeof openid == "undefined" || openid == "") {
+      _this.getUserOpenid()
+    }
     //用户登录
     wx.showLoading({
       title: '用户登录中....',
     })
     let apiSrc = app.globalData.appApi + "user/accessWx.do",
       openidStorage = wx.getStorageSync('openid');
-    // console.log(openidStorage)
-    // console.log(openid)
     if (openidStorage != '' || openid != '') {
       var dataPost = {
         data: JSON.stringify({
-          open_id: wx.getStorageSync('openid')
+          // open_id: wx.getStorageSync('openid')
+          open_id: openid
         })
       }
     } else {
@@ -175,11 +172,18 @@ Page({
             key: 'dict',
             data: res.data.dict
           })
-          setTimeout(function() {
-            wx.reLaunch({
-              url: '../home/index',
-            })
-          }, 2000)
+
+          //延时跳转，因为需要对缓存数据进行一次保存
+          // if (res.data.user.type == 2) {
+          //   wx.reLaunch({
+          //     url: '../merchant/index',
+          //   })
+          // } else {
+          //   wx.reLaunch({
+          //     url: '../home/index',
+          //   })
+          // }
+          app.getUserLoginSuccess(res.data.user.type)
         } else {
           wx.reLaunch({
             url: '../login/index',

@@ -1,0 +1,76 @@
+/* pages/merchantSalesmanParticulars/index.wxss */
+
+.bg-white {
+  background: white;
+}
+
+.header {
+  padding: 1rem 0.5rem;
+  background: linear-gradient(to bottom, #5071ba, #809ee0);
+  background: -webkit-linear-gradient(to bottom, #5071ba, #809ee0);
+  background: -moz-linear-gradient(to bottom, #5071ba, #809ee0);
+  background: -o-linear-gradient(to bottom, #5071ba, #809ee0);
+  color: white;
+  text-align: center;
+}
+
+.header_pic {
+  width: 4rem;
+  height: 4rem;
+  margin: auto;
+  border-radius: 100%;
+  background-size: contain;
+}
+
+.st_sum {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.sts_list {
+  width: 30%;
+  margin: 0.5rem 1.5%;
+  text-align: center;
+  background: linear-gradient(to bottom, #acc1ed, #86a3e3);
+  background: -webkit-linear-gradient(to bottom, #acc1ed, #86a3e3);
+  background: -moz-linear-gradient(to bottom, #acc1ed, #86a3e3);
+  background: -o-linear-gradient(to bottom, #acc1ed, #86a3e3);
+  font-size: 0.6rem;
+  padding: 0.5rem 0;
+  color: white;
+  border-radius: 0.25rem;
+}
+
+.sts_number {
+  font-size: 1.4rem;
+}
+
+.labels {
+  border-top: 0.5rem solid #F8F8F8;
+}
+
+.labels_title {
+  padding: 0.5rem;
+  border-bottom: 0.01rem solid #F8F8F8;
+}
+
+.ls_flex {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+}
+
+.ls_flex>view {
+  width: 45%;
+  margin: 0.5rem 2.5%;
+  padding: 0.5rem 0;
+  text-align: center;
+  background: linear-gradient(to bottom, #acc0ed, #86a3e3);
+  background: -webkit-linear-gradient(to bottom, #acc0ed, #86a3e3);
+  background: -moz-linear-gradient(to bottom, #acc0ed, #86a3e3);
+  background: -o-linear-gradient(to bottom, #acc0ed, #86a3e3);
+  color: white;
+}

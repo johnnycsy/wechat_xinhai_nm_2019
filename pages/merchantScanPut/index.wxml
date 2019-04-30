@@ -1,0 +1,31 @@
+<!--pages/merchantScanPut/index.wxml-->
+<view>
+  <!-- top -->
+  <view class='header_top'>
+    <view class='header_top_list bg-white'>
+      <view>总箱数</view>
+      <view>{{sumCartonNumbers}}</view>
+    </view>
+    <view class='header_top_list bg-white'>
+      <view>总盒数</view>
+      <view>{{sumBoxNumber}}</view>
+    </view>
+  </view>
+  <!-- list -->
+  <view class='list_main'>
+    <view class='list_title'>收货清单</view>
+    <view class='but_scan' bindtap='getScanPut'>
+      <image src='../../utils/image/scan_20190411.png' /> 扫码收货
+    </view>
+    <view class='list_val bg-white'>
+      <view class='lv_show'>
+      <view class='lv_serial'>1</view>
+      <view class='lv_title'>商品名称</view>
+      <view class='lv_specification'>规格：{{}}盒装</view>
+      <view class='lv_but'><image src='../../utils/image/delete_20190413.png'></image></view>
+      </view>
+    </view>
+    <view class='lv_sub'>确认收货</view>
+  </view>
+
+</view>

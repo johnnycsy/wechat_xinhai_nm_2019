@@ -31,7 +31,7 @@
     <view class='show_but'>
       <view class='show_but_scan' bindtap='getScanOne'>
         <image src='../../utils/image/scan_20190411.png'></image>单独扫码</view>
-      <view class='show_but_scan' bindtap='getScanEven'>
+      <view class='show_but_scan' bindtap='getScanEven' style='display:none;'>
         <image src='../../utils/image/scan_20190411.png'></image>连续扫码</view>
     </view>
   </view>

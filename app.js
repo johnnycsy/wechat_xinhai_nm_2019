@@ -59,6 +59,17 @@ App({
       }
     })
   },
+  getUserLoginSuccess(event) {
+    if (event == 2) {
+      wx.reLaunch({
+        url: '../merchant/index',
+      })
+    } else {
+      wx.reLaunch({
+        url: '../home/index',
+      })
+    }
+  },
   //上传七牛图片
   getUploadFile(event) {
     wx.uploadFile({

@@ -1,0 +1,30 @@
+/* pages/merchant/index.wxss */
+
+page {
+  background: #f1f5f8;
+}
+
+.header_bg {
+  background: linear-gradient(to bottom, #5071ba, #6080c7);
+  background: -moz-linear-gradient(to bottom, #5071ba, #6080c7);
+  background: -webkit-linear-gradient(to bottom, #5071ba, #6080c7);
+  background: -o-linear-gradient(to bottom, #5071ba, #6080c7);
+  color: #fff;
+}
+
+.header_bg>.page__title {
+  text-align: center;
+}
+
+.bg-white .weui-grid {
+  background: white;
+}
+
+.server_kf {
+  position: absolute;
+  top: -0.1%;
+  left: -0.1%;
+  right: -0.1%;
+  bottom: -0.1%;
+  opacity: 0;
+}

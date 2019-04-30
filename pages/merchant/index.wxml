@@ -1,0 +1,24 @@
+<!--pages/merchant/index.wxml-->
+<view class="page">
+  <view class="page__hd header_bg">
+    <view class="page__title">欢迎，经销商 {{merchantsName}}</view>
+    <view class="page__desc"></view>
+  </view>
+
+  <view class="page__bd bg-white">
+    <view class="weui-grids">
+      <block wx:for="{{grids}}" wx:key="*this">
+        <view wx:if="{{item.url=='server'}}" class="weui-grid" hover-class="weui-grid_active">
+          <image class="weui-grid__icon" src="{{item.icon}}" />
+          <view class="weui-grid__label">{{item.name}}</view>
+          <button open-type="contact" class='server_kf'>进入客服会话</button>
+        </view>
+        <navigator wx:else url="{{item.url}}" class="weui-grid" hover-class="weui-grid_active">
+          <image class="weui-grid__icon" src="{{item.icon}}" />
+          <view class="weui-grid__label">{{item.name}}</view>
+        </navigator>
+      </block>
+    </view>
+  </view>
+
+</view>

@@ -18,7 +18,13 @@
     "pages/addressSelect/index",
     "pages/amap/index",
     "pages/scanQr/index",
-    "pages/continuous/index"
+    "pages/continuous/index",
+    "pages/merchant/index",
+    "pages/merchantScanPut/index",
+    "pages/merchantSalesman/index",
+    "pages/merchantSalesmanParticulars/index",
+    "pages/merchantStockRecord/index",
+    "pages/merchantStockRecordDetails/index"
   ],
   "permission": {
     "scope.userLocation": {
@@ -53,5 +59,6 @@
         "text": "我的"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

@@ -1,0 +1,37 @@
+<!--pages/merchantSalesmanParticulars/index.wxml-->
+<view class='bg-white'>
+  <!-- header -->
+  <view class='header'>
+    <view class='header_pic' style='background-image:url("{{userHeader}}")'></view>
+    <view class='header_name'>{{userName}}</view>
+    <view class='header_company'>所属公司：{{userCompany}}</view>
+    <view class='header_phone'>联系电话：{{userPhone}}</view>
+  </view>
+  <!-- statistics -->
+  <view class='st_sum'>
+    <view class='sts_list'>
+      <view class='sts_title'>销售总额（元）</view>
+      <view class='sts_number'>{{statisticsMoney}}</view>
+    </view>
+    <view class='sts_list'>
+      <view class='sts_title'>销售总量（只）</view>
+      <view class='sts_number'>{{statisticsQuantity}}</view>
+    </view>
+    <view class='sts_list'>
+      <view class='sts_title'>开发店铺（家）</view>
+      <view class='sts_number'>{{statisticsFamily}}</view>
+    </view>
+  </view>
+  <!-- label -->
+  <view class='labels'>
+    <view class='labels_title'>常驻标签</view>
+    <!-- label case -->
+    <view class='ls_flex'>
+      <view>低端小区（0次）</view>
+      <view>中高端小区（0次）</view>
+      <view>商圈（0次）</view>
+      <view>写字楼（0次）</view>
+    </view>
+  </view>
+
+</view>

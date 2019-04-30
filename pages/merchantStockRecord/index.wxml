@@ -1,0 +1,20 @@
+<!--pages/merchantStockRecord/index.wxml-->
+<view>
+  <!-- 进货记录 -->
+  <block wx:for='{{orderAll}}' wx:key="key" wx:for-index="index" wx:for-item="item">
+    <view class='ls_main' wx:if='{{item.type==0}}' bindtap='getOrderDetails' data-key='{{index}}'>
+      <view>
+        <view>订单编号：{{item.orderNo}}</view>
+        <view>进货时间：{{item.orderTime}}</view>
+      </view>
+      <view class='ls_icon' style='background-image:url("../../utils/image/{{item.orderIcon}}");'></view>
+    </view>
+    <view class='ls_main' wx:else style='background-color:#F87272;color:white;' bindtap='getOrderDetails' data-key='{{index}}'>
+      <view>
+        <view>订单编号：{{item.orderNo}}</view>
+        <view>进货时间：{{item.orderTime}}</view>
+      </view>
+      <view class='ls_icon' style='background-image:url("../../utils/image/{{item.orderIcon}}");'></view>
+    </view>
+  </block>
+</view>

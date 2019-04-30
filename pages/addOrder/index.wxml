@@ -11,6 +11,7 @@
 </view>
 
 <view class='stop_but'>
+  <!-- <view class='stop-but' bindtap='getScanOrder' style='display:none'> -->
   <view class='stop-but' bindtap='getScanOrder'>
     <image src='../../utils/image/scan_20190411.png'></image>
     <view>扫码下单</view>
